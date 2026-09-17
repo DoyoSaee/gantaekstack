@@ -3,11 +3,12 @@ import Link from "next/link";
 // AppShell 내비: 마크 · 이름 · 메뉴(현재 위치 = foreground+500, 나머지 muted)
 const MENUS = [
   { href: "/", label: "이력서 시대 진단" },
+  { href: "/match", label: "공고 매칭" },
   { href: "/market", label: "시장 대시보드" },
   { href: "/gap", label: "스택 직접 입력" },
 ] as const;
 
-export function AppNav({ current }: { current: "/" | "/market" | "/gap" }) {
+export function AppNav({ current }: { current: "/" | "/match" | "/market" | "/gap" }) {
   return (
     <nav className="mb-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
       <Link href="/" className="flex items-center gap-2">

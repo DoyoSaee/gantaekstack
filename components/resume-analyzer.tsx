@@ -345,7 +345,13 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                   AI가 이력서에서 읽어낸 기술 — 아래 모든 진단의 근거
                 </CardDescription>
               </div>
-              <div className="flex shrink-0 gap-2">
+              <div className="flex shrink-0 flex-wrap gap-2">
+                <a
+                  href={`/match?s=${encodeURIComponent(res.skills.join(","))}`}
+                  className="rounded-md border px-3 py-1.5 text-xs font-medium text-foreground transition hover:border-foreground"
+                >
+                  이 스택으로 공고 매칭 →
+                </a>
                 <button
                   onClick={downloadCard}
                   disabled={!era}
