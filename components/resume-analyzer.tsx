@@ -33,13 +33,13 @@ import {
 
 const chartConfig = { score: { label: "내 스택 주류도", color: "var(--chart-1)" } } satisfies ChartConfig;
 
-// DS 규칙: 액센트는 라즈베리 하나 — 상승 지표에만. 나머지는 차콜 단계로.
+// DS §2 DataRow: 추세는 색이 아니라 화살표·굵기. 가장 진한 줄 = 할 말이 가장 많은 줄(뚜렷한 감소).
 const TREND_LABEL: Record<string, { text: string; cls: string }> = {
-  rising: { text: "↑ 상승", cls: "text-[var(--raspberry)] font-medium" },
+  rising: { text: "↑ 상승", cls: "text-[#4A4B4F] dark:text-[#B9BBBF]" },
   stable: { text: "→ 유지", cls: "text-muted-foreground" },
   easing: { text: "↘ 완만한 감소", cls: "text-muted-foreground" },
   declining: { text: "↓ 뚜렷한 감소", cls: "text-foreground font-medium" },
-  modern: { text: "🆕 신생·현역", cls: "text-muted-foreground" },
+  modern: { text: "신생 · 현역", cls: "text-muted-foreground" },
 };
 
 const SAMPLE = `프론트엔드 개발자. jQuery와 PHP로 사내 웹 유지보수, Java Spring 백엔드 경험.
@@ -99,6 +99,13 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
 
   const era = res?.era;
   const busy = pending || pdfBusy;
+  // 곡선 위 격차 구간(액센트): 무게중심에 가장 가까운 실제 눈금 ~ 최신 연도
+  const gapAnchor = era
+    ? era.yearScores
+        .map((s) => s.year)
+        .reduce((b, y) => (Math.abs(y - era.centroidYear) < Math.abs(b - era.centroidYear) ? y : b))
+    : 0;
+  const yTop = era ? Math.max(...era.yearScores.map((s) => s.score)) : 0;
 
   return (
     <div className="space-y-6">
@@ -137,7 +144,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
             <button
               onClick={run}
               disabled={busy || text.trim().length < 20}
-              className="rounded-md bg-[var(--raspberry)] px-4 py-2 text-sm font-bold text-[#FEFEFE] transition hover:opacity-90 disabled:opacity-40"
+              className="rounded-md bg-[var(--raspberry)] px-4 py-2 text-base font-bold text-[#FEFEFE] transition hover:opacity-90 disabled:opacity-40"
             >
               {pdfBusy ? "ㅡㅅㅡ PDF 읽는 중…" : pending ? "ㅡㅅㅡ 분석 중…" : "내 스택 시대 진단"}
             </button>
@@ -202,7 +209,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
 
       {/* AI 총평 */}
       {res?.comment && (
-        <Card className="border-l-4 border-l-[var(--raspberry)]">
+        <Card className="border-l-4 border-l-foreground">
           <CardContent className="py-4">
             <p className="text-[15px] leading-relaxed">
               <span className="mr-1.5 select-none font-black" aria-hidden>ㅇㅅㅇ</span>
@@ -281,11 +288,29 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                   <YAxis hide />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <ReferenceLine
-                    x={Math.round(era.centroidYear)}
-                    stroke="var(--chart-1)"
+                    x={gapAnchor}
+                    stroke="var(--chart-3)"
                     strokeDasharray="4 4"
-                    label={{ value: "무게중심", position: "top", fontSize: 11 }}
+                    label={{ value: "무게중심", position: "insideBottomLeft", fontSize: 11, fill: "var(--muted-foreground)" }}
                   />
+                  {/* 화면의 액센트: 격차 구간 (DS §5 — 연도가 아니라 "지금과 얼마나 떨어져 있나"가 답) */}
+                  {era.gapYears > 0.4 && gapAnchor < LATEST_YEAR && (
+                    <ReferenceLine
+                      segment={[
+                        { x: gapAnchor, y: yTop },
+                        { x: LATEST_YEAR, y: yTop },
+                      ]}
+                      stroke="var(--raspberry)"
+                      strokeWidth={2.5}
+                      label={{
+                        value: `격차 ${era.gapYears}년`,
+                        position: "top",
+                        fontSize: 11,
+                        fontWeight: 500,
+                        fill: "var(--foreground)",
+                      }}
+                    />
+                  )}
                   <Line
                     dataKey="score"
                     type="monotone"

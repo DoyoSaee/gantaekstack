@@ -33,12 +33,12 @@ export default async function Home({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="간택스택 마크" className="h-9 w-9 dark:invert" />
           <p className="text-base font-black tracking-[-0.02em]">간택스택</p>
-          <span className="rounded-full border border-[var(--raspberry)] px-2 py-0.5 font-mono text-[11px] font-medium text-[var(--raspberry)]">
+          <span className="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] font-medium text-muted-foreground">
             BETA
           </span>
         </div>
         <h1 className="mt-3 text-4xl font-black leading-[1.15] tracking-[-0.04em]">
-          내 이력서, <span className="underline decoration-[var(--raspberry)] decoration-4 underline-offset-4">몇 년도</span> 스택일까
+          내 이력서, <span className="underline decoration-foreground decoration-4 underline-offset-4">몇 년도</span> 스택일까
         </h1>
         <p className="mt-3 text-muted-foreground">
           이력서를 넣으면 — AI가 스택을 읽고, 기술마다{" "}
@@ -62,9 +62,7 @@ export default async function Home({
           href="/market"
           className="group rounded-lg border bg-card p-4 transition hover:border-foreground"
         >
-          <p className="font-bold">
-            시장 대시보드 <span className="transition group-hover:text-[var(--raspberry)]">→</span>
-          </p>
+          <p className="font-bold">시장 대시보드 →</p>
           <p className="mt-1 text-sm text-muted-foreground">
             지금 채용시장이 간택하는 기술 TOP 20 · 지역×직군별 · AI가 포착한 숨은 요구
           </p>
@@ -73,9 +71,7 @@ export default async function Home({
           href="/gap"
           className="group rounded-lg border bg-card p-4 transition hover:border-foreground"
         >
-          <p className="font-bold">
-            스택 직접 입력 <span className="transition group-hover:text-[var(--raspberry)]">→</span>
-          </p>
+          <p className="font-bold">스택 직접 입력 →</p>
           <p className="mt-1 text-sm text-muted-foreground">
             이력서 없이 기술만 골라서 시장 수요와 격차 보기
           </p>
