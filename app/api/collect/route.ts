@@ -4,6 +4,8 @@ import { arbeitnowSource } from "@/lib/sources/arbeitnow";
 import { remoteokSource } from "@/lib/sources/remoteok";
 import { remotiveSource } from "@/lib/sources/remotive";
 import { jobicySource } from "@/lib/sources/jobicy";
+import { hnSource } from "@/lib/sources/hn";
+import { museSource } from "@/lib/sources/muse";
 import { moefSource } from "@/lib/sources/moef";
 // import { saraminSource } from "@/lib/sources/saramin"; // 승인 시 활성화
 
@@ -17,6 +19,8 @@ async function run() {
   results.push(await runCollection(remoteokSource, 60, 800));
   results.push(await runCollection(remotiveSource, 60, 800));
   results.push(await runCollection(jobicySource, 60, 800));
+  results.push(await runCollection(hnSource, 80, 800)); // 최신 스레드 신규분만(멱등)
+  results.push(await runCollection(museSource, 60, 800));
   // 한국 공공기관(공공데이터포털) — 키 활성화 후 동작, 없으면 자동 스킵
   results.push(await runCollection(moefSource, 60, 800));
   // 한국 민간: 사람인 승인 시 아래 주석 해제

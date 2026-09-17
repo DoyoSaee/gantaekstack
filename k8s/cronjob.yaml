@@ -1,0 +1,33 @@
+# 일일 수집 — 매일 07:00 KST (22:00 UTC)
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: gantaek-collect
+  namespace: default
+spec:
+  schedule: "0 22 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 900
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: collect
+              image: curlimages/curl:8.10.1
+              env:
+                - name: CRON_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: gantaek-secrets
+                      key: CRON_SECRET
+              args:
+                - "-sf"
+                - "-m"
+                - "870"
+                - "-H"
+                - "x-cron-secret: $(CRON_SECRET)"
+                - "http://gantaek-service:3007/api/collect"

@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LATEST_YEAR } from "@/lib/era-data";
+import { SAMPLE_RESUMES } from "@/lib/sample-resumes";
 import {
   analyzeResume,
   analyzeSkillList,
@@ -42,7 +43,8 @@ const TREND_LABEL: Record<string, { text: string; cls: string }> = {
   modern: { text: "신생 · 현역", cls: "text-muted-foreground" },
 };
 
-const SAMPLE = `프론트엔드 개발자. jQuery와 PHP로 사내 웹 유지보수, Java Spring 백엔드 경험.
+// 레거시 스택 데모용 (실이력서 샘플과 별개 — 시대 격차가 크게 나오는 예시)
+const LEGACY_SAMPLE = `프론트엔드 개발자. jQuery와 PHP로 사내 웹 유지보수, Java Spring 백엔드 경험.
 AngularJS SPA 마이그레이션, MySQL 쿼리 최적화. 최근 React, TypeScript 학습 중.`;
 
 export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[] }) {
@@ -180,13 +182,27 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                 e.target.value = "";
               }}
             />
-            <button
-              onClick={() => setText(SAMPLE)}
+            <select
+              value=""
               disabled={busy}
-              className="text-sm text-muted-foreground hover:text-foreground"
+              onChange={(e) => {
+                const v = e.target.value;
+                if (v === "legacy") setText(LEGACY_SAMPLE);
+                else if (v) setText(SAMPLE_RESUMES[Number(v)]?.text ?? "");
+              }}
+              className="h-10 rounded-lg border bg-transparent px-2.5 text-sm text-muted-foreground outline-none transition hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring"
+              aria-label="샘플 이력서 선택"
             >
-              샘플 넣기
-            </button>
+              <option value="" disabled>
+                샘플 이력서 넣기…
+              </option>
+              {SAMPLE_RESUMES.map((s, i) => (
+                <option key={s.label} value={i}>
+                  {s.label}
+                </option>
+              ))}
+              <option value="legacy">레거시 스택 예시 (격차 데모)</option>
+            </select>
             {res?.error && <span className="text-sm text-red-500">{res.error}</span>}
           </div>
         </CardContent>
