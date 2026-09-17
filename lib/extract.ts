@@ -43,26 +43,35 @@ export async function extractRequirements(
   };
 }
 
-// ── 이력서용: 지원자가 보유/사용한 기술 스킬 추출(canonical 명칭 배열) ──
-const RESUME_INSTRUCTION = `너는 이력서 스킬 추출기다. 이력서·경력기술서 원문에서 지원자가 실제로 사용·보유한 기술 스킬만 뽑아라.
-- skills: 기술 스킬 name 배열. 짧은 정규 명칭(예: "React","PostgreSQL","AWS","Docker"). ⚠️ 회화 언어(영어·독일어 등)·일반어(개발·소프트웨어·엔지니어)는 제외.
-- 복합 표기는 낱개로 분리해라: "Java Spring" → "Java","Spring" / "React/Next.js" → "React","Next.js".
-반드시 이력서에 근거한 것만. 추측 금지.`;
+// ── 이력서용: 보유 스킬 + 연차·직군(익명 페르소나) 추출 ──
+export type ResumeProfile = {
+  skills: string[];
+  years: number | null;
+  role: string | null; // 프론트엔드|백엔드|풀스택|모바일|데이터|데브옵스|기타
+};
 
-export async function extractResumeSkills(resumeText: string): Promise<string[]> {
+const RESUME_INSTRUCTION = `너는 이력서 분석기다. 이력서·경력기술서 원문에서 JSON으로 추출해라.
+- skills: 지원자가 실제 사용·보유한 기술 스킬 name 배열. 짧은 정규 명칭(예: "React","PostgreSQL","AWS","Docker"). ⚠️ 회화 언어(영어·독일어 등)·일반어(개발·소프트웨어·엔지니어)는 제외.
+- 복합 표기는 낱개로 분리해라: "Java Spring" → "Java","Spring" / "React/Next.js" → "React","Next.js".
+- years: 총 경력 연차(숫자). 신입/판단불가면 null.
+- role: 주 직군 — "프론트엔드"|"백엔드"|"풀스택"|"모바일"|"데이터"|"데브옵스"|"기타" 중 하나. 판단불가면 null.
+반드시 이력서에 근거한 것만. 추측 금지(연차·직군 추정은 허용).`;
+
+export async function extractResumeProfile(resumeText: string): Promise<ResumeProfile> {
   if (KEY) {
     try {
-      return await resumeSkillsGemini(resumeText);
+      return await resumeProfileGemini(resumeText);
     } catch (e) {
       console.error("[resume] Gemini 실패 → 키워드 폴백:", e);
     }
   }
-  return [...new Set(scanSkills(resumeText).map(normalizeSkill))].filter(
+  const skills = [...new Set(scanSkills(resumeText).map(normalizeSkill))].filter(
     (s) => s && !isStopSkill(s),
   );
+  return { skills, years: extractExperienceYears(resumeText), role: null };
 }
 
-async function resumeSkillsGemini(resumeText: string): Promise<string[]> {
+async function resumeProfileGemini(resumeText: string): Promise<ResumeProfile> {
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${KEY}`,
     {
@@ -76,7 +85,11 @@ async function resumeSkillsGemini(resumeText: string): Promise<string[]> {
           responseMimeType: "application/json",
           responseSchema: {
             type: "OBJECT",
-            properties: { skills: { type: "ARRAY", items: { type: "STRING" } } },
+            properties: {
+              skills: { type: "ARRAY", items: { type: "STRING" } },
+              years: { type: "INTEGER", nullable: true },
+              role: { type: "STRING", nullable: true },
+            },
             required: ["skills"],
           },
         },
@@ -87,9 +100,15 @@ async function resumeSkillsGemini(resumeText: string): Promise<string[]> {
   const data = await res.json();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
   const parsed = JSON.parse(text);
-  return [...new Set(((parsed.skills ?? []) as string[]).map(normalizeSkill))].filter(
+  const skills = [...new Set(((parsed.skills ?? []) as string[]).map(normalizeSkill))].filter(
     (s) => s && !isStopSkill(s),
   );
+  const ROLES = new Set(["프론트엔드", "백엔드", "풀스택", "모바일", "데이터", "데브옵스", "기타"]);
+  return {
+    skills,
+    years: typeof parsed.years === "number" ? parsed.years : null,
+    role: ROLES.has(parsed.role) ? parsed.role : null,
+  };
 }
 
 // ── AI 총평: 진단 수치를 사람의 언어로 (판단 아니라 방향) ──

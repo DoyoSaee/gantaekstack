@@ -2,6 +2,7 @@ import Link from "next/link";
 import { counts } from "@/lib/aggregate";
 import { ERA_YEARS } from "@/lib/era-data";
 import { ResumeAnalyzer } from "@/components/resume-analyzer";
+import { AppNav } from "@/components/app-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default async function Home({
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
+      <AppNav current="/" />
       <header className="relative mb-8">
         {/* 워터마크 마크 — 그림자 대신 마크로 지면에 결 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -29,15 +31,7 @@ export default async function Home({
           aria-hidden
           className="pointer-events-none absolute -right-2 -top-4 h-44 w-44 opacity-[0.07] dark:invert"
         />
-        <div className="flex items-center gap-2.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="간택스택 마크" className="h-9 w-9 dark:invert" />
-          <p className="text-base font-black tracking-[-0.02em]">간택스택</p>
-          <span className="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] font-medium text-muted-foreground">
-            BETA
-          </span>
-        </div>
-        <p className="mt-6 font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Market-Picked Stack
         </p>
         <h1 className="mt-2 text-[40px] font-black leading-[46px] tracking-[-0.04em]">

@@ -1,6 +1,6 @@
 "use server";
 
-import { extractResumeSkills, summarizeDiagnosis } from "@/lib/extract";
+import { extractResumeProfile, summarizeDiagnosis } from "@/lib/extract";
 import { analyzeEra, EraResult } from "@/lib/era";
 import { skillGap, coOccurring, marketEra } from "@/lib/aggregate";
 import { normalizeSkill, isStopSkill } from "@/lib/skills";
@@ -12,6 +12,7 @@ export type AnalyzeResult = {
   together: { name: string; count: number }[]; // 내 스택과 같은 공고에서 함께 요구된 기술
   comment: string | null; // AI 총평 (없어도 동작)
   marketEraAvg: number | null; // 시장이 요구하는 스택의 무게중심 (비교용)
+  persona: { years: number | null; role: string | null } | null; // 익명 정체성 ("3년차 풀스택"님)
   error?: string;
 };
 
@@ -22,10 +23,15 @@ const EMPTY: AnalyzeResult = {
   together: [],
   comment: null,
   marketEraAvg: null,
+  persona: null,
 };
 
 // 공용 진단: 스킬 배열 → 시대 + 시장 갭 + 동반수요 + AI 총평
-async function diagnose(skills: string[], region?: string): Promise<AnalyzeResult> {
+async function diagnose(
+  skills: string[],
+  region?: string,
+  persona: AnalyzeResult["persona"] = null,
+): Promise<AnalyzeResult> {
   const era = analyzeEra(skills);
   const reg = region === "kr" || region === "global" ? region : undefined;
   const [gap, mkt] = await Promise.all([skillGap(skills, reg), marketEra(reg)]);
@@ -62,7 +68,7 @@ async function diagnose(skills: string[], region?: string): Promise<AnalyzeResul
     console.error("[comment] 총평 생성 실패(무시):", e);
   }
 
-  return { skills, era, gap, together, comment, marketEraAvg: mkt?.avg ?? null };
+  return { skills, era, gap, together, comment, marketEraAvg: mkt?.avg ?? null, persona };
 }
 
 // 이력서 텍스트 → 스킬 추출 → 진단.
@@ -77,11 +83,11 @@ export async function analyzeResume(
   if (text.length > 20000) {
     return { ...EMPTY, error: "너무 길어요. 기술이 드러나는 부분 위주로 2만자 이내로 넣어줘." };
   }
-  const skills = await extractResumeSkills(text);
-  if (skills.length === 0) {
+  const profile = await extractResumeProfile(text);
+  if (profile.skills.length === 0) {
     return { ...EMPTY, error: "기술 스킬을 찾지 못했어요. 스택이 드러나게 붙여넣어봐." };
   }
-  return diagnose(skills, region);
+  return diagnose(profile.skills, region, { years: profile.years, role: profile.role });
 }
 
 // 공유 URL(?s=React,PHP)용: 스킬 배열로 바로 진단 (Gemini 추출 생략 → 재현 빠름·무료)

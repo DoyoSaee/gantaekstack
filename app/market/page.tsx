@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SkillChart } from "@/components/skill-chart";
+import { AppNav } from "@/components/app-nav";
 
 const REGIONS = [
   { key: "", label: "전체" },
@@ -57,24 +58,7 @@ export default async function Market({
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-16">
-      {/* AppShell: 되돌아가기(좌측 최상단) + 마크 · 현재 위치 */}
-      <div className="mb-10 flex items-center gap-2.5 text-sm">
-        <Link
-          href="/"
-          className="inline-flex h-10 items-center gap-1.5 rounded-lg border bg-card px-3.5 text-[13px] font-medium text-foreground transition hover:border-foreground"
-        >
-          ← 이력서 시대 진단
-        </Link>
-        <div className="ml-auto flex items-center gap-2.5">
-          <Link href="/" className="flex items-center gap-2.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg" alt="간택스택 마크" className="h-7 w-7 dark:invert" />
-            <span className="font-black tracking-[-0.02em]">간택스택</span>
-          </Link>
-          <span className="text-muted-foreground">·</span>
-          <span className="font-medium text-muted-foreground" aria-current="page">시장 대시보드</span>
-        </div>
-      </div>
+      <AppNav current="/market" />
       <header className="mb-8">
         <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Market

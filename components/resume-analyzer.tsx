@@ -47,6 +47,15 @@ const TREND_LABEL: Record<string, { text: string; cls: string }> = {
 const LEGACY_SAMPLE = `프론트엔드 개발자. jQuery와 PHP로 사내 웹 유지보수, Java Spring 백엔드 경험.
 AngularJS SPA 마이그레이션, MySQL 쿼리 최적화. 최근 React, TypeScript 학습 중.`;
 
+// 익명 정체성: "3년차 풀스택" (이름은 받지도 저장하지도 않음)
+function personaLabel(res: AnalyzeResult | null): string | null {
+  const p = res?.persona;
+  if (!p || (!p.role && p.years == null)) return null;
+  if (p.years != null && p.role) return `${p.years}년차 ${p.role}`;
+  if (p.role) return p.role;
+  return `${p.years}년차 개발자`;
+}
+
 export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[] }) {
   const [text, setText] = useState("");
   const [res, setRes] = useState<AnalyzeResult | null>(null);
@@ -54,19 +63,25 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
   const [dragOver, setDragOver] = useState(false);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [inputOpen, setInputOpen] = useState(true); // 결과가 나오면 입력창은 접힘
   const fileRef = useRef<HTMLInputElement>(null);
   const bootedRef = useRef(false);
+
+  function applyResult(r: AnalyzeResult) {
+    setRes(r);
+    if (r.skills.length > 0) setInputOpen(false);
+  }
 
   // 공유 링크(?s=...)로 진입 시 자동 분석 (Gemini 추출 생략, 스킬로 바로)
   useEffect(() => {
     if (bootedRef.current || initialSkills.length === 0) return;
     bootedRef.current = true;
-    start(async () => setRes(await analyzeSkillList(initialSkills)));
+    start(async () => applyResult(await analyzeSkillList(initialSkills)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function run() {
-    start(async () => setRes(await analyzeResume(text)));
+    start(async () => applyResult(await analyzeResume(text)));
   }
 
   async function onFile(file: File) {
@@ -78,7 +93,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
         const r = await extractPdfText(fd);
         if (r.text) {
           setText(r.text);
-          start(async () => setRes(await analyzeResume(r.text!)));
+          start(async () => applyResult(await analyzeResume(r.text!)));
         } else {
           setRes({
             skills: [],
@@ -87,6 +102,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
             together: [],
             comment: null,
             marketEraAvg: null,
+            persona: null,
             error: r.error,
           });
         }
@@ -107,6 +123,92 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
     setTimeout(() => setCopied(false), 1600);
   }
 
+  // 진단 결과를 공유용 이미지 카드(1200×630 PNG)로 — DS 팔레트·표정 그대로
+  async function downloadCard() {
+    if (!res?.era) return;
+    const e = res.era;
+    await document.fonts.ready;
+    const sans = getComputedStyle(document.body).fontFamily || "sans-serif";
+    const mono =
+      getComputedStyle(document.documentElement).getPropertyValue("--font-geist-mono").trim() ||
+      "monospace";
+    const c = document.createElement("canvas");
+    c.width = 1200;
+    c.height = 630;
+    const x = c.getContext("2d")!;
+    // 지면 + 카드 (그림자 없음, 선 한 겹)
+    x.fillStyle = "#F4F5F6";
+    x.fillRect(0, 0, 1200, 630);
+    x.fillStyle = "#FEFEFE";
+    x.strokeStyle = "#E5E6E8";
+    x.lineWidth = 2;
+    x.beginPath();
+    x.roundRect(48, 48, 1104, 534, 16);
+    x.fill();
+    x.stroke();
+    // 브랜드
+    x.fillStyle = "#28272A";
+    x.font = `900 30px ${sans}`;
+    x.fillText("간택스택", 96, 122);
+    x.font = `500 15px ${mono}`;
+    x.fillStyle = "#6E7075";
+    x.fillText("M A R K E T - P I C K E D   S T A C K", 96, 150);
+    // 페르소나
+    const p = personaLabel(res);
+    x.fillStyle = "#28272A";
+    x.font = `700 26px ${sans}`;
+    x.fillText(p ? `${p}님의 시대 진단` : "내 스택 시대 진단", 96, 208);
+    // 표정 + 연도 (화면의 답)
+    const face = e.gapYears > 0.4 ? "ㅌㅅㅌ" : "^ㅅ^";
+    x.font = `900 92px ${sans}`;
+    x.fillText(face, 96, 330);
+    const faceW = x.measureText(face).width;
+    x.font = `500 100px ${mono}`;
+    x.fillText(`≈ ${Math.round(e.centroidYear)}년`, 96 + faceW + 36, 330);
+    // 액센트: 라즈베리 띠 (연도 밑줄)
+    x.fillStyle = "#F32859";
+    x.fillRect(96 + faceW + 40, 348, 380, 5);
+    // 해설
+    x.fillStyle = "#28272A";
+    x.font = `400 24px ${sans}`;
+    const gapLine =
+      e.gapYears > 0.4
+        ? `최신 설문(${LATEST_YEAR})보다 ${e.gapYears}년 이전` +
+          (res.marketEraAvg != null ? ` · 시장 요구 ≈ ${res.marketEraAvg}년` : "")
+        : "최신 시장과 나란히 걷는 스택";
+    x.fillText(gapLine, 96, 408);
+    // 직군별 축
+    if (e.byCategory.length > 1) {
+      x.fillStyle = "#6E7075";
+      x.font = `400 19px ${mono}`;
+      x.fillText(
+        e.byCategory.map((b) => `${b.label} ≈${Math.round(b.centroidYear)}`).join("   ·   "),
+        96,
+        448,
+      );
+    }
+    // 다음 걸음
+    const next = (res.together.length ? res.together : res.gap?.missing ?? [])
+      .slice(0, 5)
+      .map((s) => s.name);
+    if (next.length) {
+      x.fillStyle = "#28272A";
+      x.font = `700 20px ${sans}`;
+      x.fillText("다음 걸음", 96, 510);
+      x.font = `500 20px ${mono}`;
+      x.fillText(next.join("  ·  "), 210, 510);
+    }
+    // 푸터
+    x.fillStyle = "#6E7075";
+    x.font = `400 17px ${mono}`;
+    const url = "gantaek.doyosae.com";
+    x.fillText(url, 1104 - x.measureText(url).width, 552);
+    const a = document.createElement("a");
+    a.href = c.toDataURL("image/png");
+    a.download = `간택스택-진단-${Math.round(e.centroidYear)}.png`;
+    a.click();
+  }
+
   const era = res?.era;
   const busy = pending || pdfBusy;
   // 곡선 위 격차 구간(액센트): 무게중심에 가장 가까운 실제 눈금 ~ 최신 연도
@@ -119,12 +221,29 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
 
   return (
     <div className="space-y-6">
-      {/* 입력 */}
+      {/* 입력 (결과가 나오면 접힘) */}
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base">이력서 / 경력기술서</CardTitle>
-          <CardDescription>텍스트를 붙여넣거나 PDF를 끌어다 놓으면 AI가 기술만 추출해</CardDescription>
+        <CardHeader className={inputOpen ? "pb-3" : "pb-6"}>
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <CardTitle className="text-base">이력서 / 경력기술서</CardTitle>
+              <CardDescription className="mt-1">
+                {inputOpen
+                  ? "텍스트를 붙여넣거나 PDF를 끌어다 놓으면 AI가 기술만 추출해"
+                  : `${text.length.toLocaleString()}자 입력됨 — 펼쳐서 수정하거나 다시 진단`}
+              </CardDescription>
+            </div>
+            {res && res.skills.length > 0 && (
+              <button
+                onClick={() => setInputOpen((v) => !v)}
+                className="shrink-0 rounded-md border px-3 py-1.5 text-[13px] text-muted-foreground transition hover:border-foreground hover:text-foreground"
+              >
+                {inputOpen ? "접기 ↑" : "펼치기 ↓"}
+              </button>
+            )}
+          </div>
         </CardHeader>
+        {inputOpen && (
         <CardContent className="space-y-3">
           <div
             onDragOver={(e) => {
@@ -206,32 +325,54 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
             {res?.error && <span className="text-sm text-red-500">{res.error}</span>}
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* AI가 읽어낸 스택 — 근거 투명화 */}
       {res && res.skills.length > 0 && (
         <Card>
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <CardTitle className="text-base">AI가 읽어낸 스택 ({res.skills.length}개)</CardTitle>
+                <CardTitle className="text-base">
+                  {personaLabel(res) && (
+                    <span className="mr-1.5 font-black">{personaLabel(res)}님의</span>
+                  )}
+                  스택 <span className="font-mono font-medium">({res.skills.length})</span>
+                </CardTitle>
                 <CardDescription className="mt-1">
-                  이게 아래 모든 진단의 근거야 — 잘못 읽었으면 문구를 다듬어 다시 돌려봐
+                  AI가 이력서에서 읽어낸 기술 — 아래 모든 진단의 근거
                 </CardDescription>
               </div>
-              <button
-                onClick={share}
-                className="shrink-0 rounded-md border px-3 py-1.5 text-xs text-muted-foreground transition hover:bg-muted"
-              >
-                {copied ? "복사됨 ✓" : "결과 공유 링크"}
-              </button>
+              <div className="flex shrink-0 gap-2">
+                <button
+                  onClick={downloadCard}
+                  disabled={!era}
+                  className="rounded-md border px-3 py-1.5 text-xs text-muted-foreground transition hover:border-foreground hover:text-foreground disabled:opacity-40"
+                >
+                  이미지 저장
+                </button>
+                <button
+                  onClick={share}
+                  className="rounded-md border px-3 py-1.5 text-xs text-muted-foreground transition hover:border-foreground hover:text-foreground"
+                >
+                  {copied ? "복사됨 ✓" : "공유 링크"}
+                </button>
+              </div>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2">
-              {res.skills.map((s) => (
-                <Badge key={s} variant="secondary">{s}</Badge>
-              ))}
+            <div className="rounded-lg bg-muted p-3">
+              <div className="flex flex-wrap gap-2">
+                {res.skills.map((s) => (
+                  <span
+                    key={s}
+                    className="rounded-md border border-border bg-card px-2.5 py-1 font-mono text-sm font-medium"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -243,6 +384,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           <CardContent className="py-4">
             <p className="text-[15px] leading-relaxed">
               <span className="mr-1.5 select-none font-black" aria-hidden>ㅇㅅㅇ</span>
+              {personaLabel(res) && (
+                <span className="font-black">{personaLabel(res)}님, </span>
+              )}
               {res.comment}
             </p>
             <p className="mt-2 text-xs text-muted-foreground">AI 총평 — 판단이 아니라 방향이야</p>
@@ -262,6 +406,58 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
 
       {era && res && (
         <>
+          {/* 시대 곡선 — 모양을 먼저, 답은 그다음 */}
+          <Card>
+            <CardHeader>
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                Curve
+              </p>
+              <CardTitle className="text-base">내 스택의 주류도 곡선</CardTitle>
+              <CardDescription>봉우리가 왼쪽일수록 과거 스택, 오른쪽일수록 현재 스택</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig} className="h-[220px] w-full">
+                <LineChart data={era.yearScores} margin={{ left: 4, right: 8, top: 8 }}>
+                  <CartesianGrid vertical={false} />
+                  <XAxis dataKey="year" tickLine={false} axisLine={false} />
+                  <YAxis hide />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ReferenceLine
+                    x={gapAnchor}
+                    stroke="var(--chart-3)"
+                    strokeDasharray="4 4"
+                    label={{ value: "무게중심", position: "insideBottomLeft", fontSize: 11, fill: "var(--muted-foreground)" }}
+                  />
+                  {/* 화면의 액센트: 격차 구간 (DS §5 — 연도가 아니라 "지금과 얼마나 떨어져 있나"가 답) */}
+                  {era.gapYears > 0.4 && gapAnchor < LATEST_YEAR && (
+                    <ReferenceLine
+                      segment={[
+                        { x: gapAnchor, y: yTop },
+                        { x: LATEST_YEAR, y: yTop },
+                      ]}
+                      stroke="var(--raspberry)"
+                      strokeWidth={2.5}
+                      label={{
+                        value: `격차 ${era.gapYears}년`,
+                        position: "top",
+                        fontSize: 11,
+                        fontWeight: 500,
+                        fill: "var(--foreground)",
+                      }}
+                    />
+                  )}
+                  <Line
+                    dataKey="score"
+                    type="monotone"
+                    stroke="var(--color-score)"
+                    strokeWidth={2}
+                    dot={{ r: 3 }}
+                  />
+                </LineChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+
           {/* 무게중심 */}
           <Card>
             <CardHeader className="pb-2">
@@ -319,58 +515,6 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                 설문 2017~2025 · 2026 설문은 결과 미공개, 공개 시 반영)과 대조했어. 아래 곡선은{" "}
                 <b>내 스택이 시장에서 가장 주류였던 시기</b>야.
               </p>
-            </CardContent>
-          </Card>
-
-          {/* 시대 곡선 */}
-          <Card>
-            <CardHeader>
-              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                Curve
-              </p>
-              <CardTitle className="text-base">내 스택의 주류도 곡선</CardTitle>
-              <CardDescription>봉우리가 왼쪽일수록 과거 스택, 오른쪽일수록 현재 스택</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-[220px] w-full">
-                <LineChart data={era.yearScores} margin={{ left: 4, right: 8, top: 8 }}>
-                  <CartesianGrid vertical={false} />
-                  <XAxis dataKey="year" tickLine={false} axisLine={false} />
-                  <YAxis hide />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <ReferenceLine
-                    x={gapAnchor}
-                    stroke="var(--chart-3)"
-                    strokeDasharray="4 4"
-                    label={{ value: "무게중심", position: "insideBottomLeft", fontSize: 11, fill: "var(--muted-foreground)" }}
-                  />
-                  {/* 화면의 액센트: 격차 구간 (DS §5 — 연도가 아니라 "지금과 얼마나 떨어져 있나"가 답) */}
-                  {era.gapYears > 0.4 && gapAnchor < LATEST_YEAR && (
-                    <ReferenceLine
-                      segment={[
-                        { x: gapAnchor, y: yTop },
-                        { x: LATEST_YEAR, y: yTop },
-                      ]}
-                      stroke="var(--raspberry)"
-                      strokeWidth={2.5}
-                      label={{
-                        value: `격차 ${era.gapYears}년`,
-                        position: "top",
-                        fontSize: 11,
-                        fontWeight: 500,
-                        fill: "var(--foreground)",
-                      }}
-                    />
-                  )}
-                  <Line
-                    dataKey="score"
-                    type="monotone"
-                    stroke="var(--color-score)"
-                    strokeWidth={2}
-                    dot={{ r: 3 }}
-                  />
-                </LineChart>
-              </ChartContainer>
             </CardContent>
           </Card>
 

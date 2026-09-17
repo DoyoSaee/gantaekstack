@@ -41,6 +41,8 @@ export function SkillChart({ data }: { data: { name: string; count: number }[] }
           width={120}
           tickLine={false}
           axisLine={false}
+          interval={0}
+          tick={{ fontSize: 12 }}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         <Bar dataKey="count" radius={5}>
