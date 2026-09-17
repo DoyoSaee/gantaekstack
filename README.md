@@ -6,6 +6,8 @@
 - **라이브**: https://gantaek.doyosae.com
 - 원티드 AI Championship 2026 출품작 · 제출 문서: [docs/SUBMISSION.md](docs/SUBMISSION.md)
 
+![간택스택 — 이력서 시대 진단](docs/screenshots/form/01-home-16x9.png)
+
 ---
 
 ## 왜 만들었나
@@ -35,6 +37,13 @@
 **"시장이 요구하는 스택의 시대"**(현재 ≈2023년)와의 실질 격차를 잽니다.
 
 ## 화면
+
+| | |
+|---|---|
+| [![이력서 시대 진단](docs/screenshots/form/02-diagnosis-16x9.png)](docs/screenshots/02-diagnosis.png) | [![공고 매칭](docs/screenshots/form/03-match-16x9.png)](docs/screenshots/03-match.png) |
+| [![시장 대시보드](docs/screenshots/form/04-market-16x9.png)](docs/screenshots/04-market.png) | [![스택 직접 입력](docs/screenshots/form/05-gap-16x9.png)](docs/screenshots/05-gap.png) |
+
+*클릭하면 전체 페이지 캡처*
 
 | 화면 | 하는 일 |
 |---|---|

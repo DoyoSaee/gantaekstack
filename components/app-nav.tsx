@@ -42,6 +42,14 @@ export function AppNav() {
             ),
           )}
         </div>
+        <a
+          href="https://github.com/DoyoSaee/gantaekstack"
+          target="_blank"
+          rel="noreferrer"
+          className="ml-auto font-mono text-xs text-muted-foreground underline underline-offset-2 transition hover:text-foreground"
+        >
+          GitHub
+        </a>
       </nav>
     </div>
   );
