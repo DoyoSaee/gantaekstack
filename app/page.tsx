@@ -20,13 +20,24 @@ export default async function Home({
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <header className="mb-8">
-        <div className="flex items-center gap-2">
+      <header className="relative mb-8">
+        {/* 워터마크 마크 — 그림자 대신 마크로 지면에 결 */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-2 -top-4 h-44 w-44 opacity-[0.07] dark:invert"
+        />
+        <div className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="(ㅌㅅㅌ)" className="h-6 w-6 dark:invert" />
-          <p className="text-sm font-medium text-muted-foreground">간택스택</p>
+          <img src="/logo.svg" alt="간택스택 마크" className="h-9 w-9 dark:invert" />
+          <p className="text-base font-black tracking-[-0.02em]">간택스택</p>
+          <span className="rounded-full border border-[var(--raspberry)] px-2 py-0.5 font-mono text-[11px] font-medium text-[var(--raspberry)]">
+            BETA
+          </span>
         </div>
-        <h1 className="mt-1 text-4xl font-black leading-[1.15] tracking-[-0.04em]">
+        <h1 className="mt-3 text-4xl font-black leading-[1.15] tracking-[-0.04em]">
           내 이력서, <span className="underline decoration-[var(--raspberry)] decoration-4 underline-offset-4">몇 년도</span> 스택일까
         </h1>
         <p className="mt-3 text-muted-foreground">
@@ -36,9 +47,10 @@ export default async function Home({
           채용시장에 맞추려면 <span className="font-medium text-foreground">뭘 더하면 되는지</span>를
           데이터로 보여줘. 채점이 아니라 방향이야.
         </p>
-        <p className="mt-3 text-xs text-muted-foreground">
-          시대축: Stack Overflow 설문 {ERA_YEARS[0]}~{ERA_YEARS[ERA_YEARS.length - 1]} ·{" "}
-          현재 수요: 채용공고 {meta.postings.toLocaleString()}건 AI 분석 · 기술 {meta.skills.toLocaleString()}종
+        <p className="mt-3 font-mono text-xs text-muted-foreground">
+          SO {ERA_YEARS[0]}–{ERA_YEARS[ERA_YEARS.length - 1]} · 채용공고{" "}
+          <span className="text-foreground">{meta.postings.toLocaleString()}</span>건 ·{" "}
+          기술 <span className="text-foreground">{meta.skills.toLocaleString()}</span>종
         </p>
       </header>
 
@@ -48,18 +60,22 @@ export default async function Home({
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         <Link
           href="/market"
-          className="rounded-lg border p-4 transition hover:bg-muted"
+          className="group rounded-lg border bg-card p-4 transition hover:border-foreground"
         >
-          <p className="font-medium">시장 대시보드 →</p>
+          <p className="font-bold">
+            시장 대시보드 <span className="transition group-hover:text-[var(--raspberry)]">→</span>
+          </p>
           <p className="mt-1 text-sm text-muted-foreground">
             지금 채용시장이 간택하는 기술 TOP 20 · 지역×직군별 · AI가 포착한 숨은 요구
           </p>
         </Link>
         <Link
           href="/gap"
-          className="rounded-lg border p-4 transition hover:bg-muted"
+          className="group rounded-lg border bg-card p-4 transition hover:border-foreground"
         >
-          <p className="font-medium">스택 직접 입력 →</p>
+          <p className="font-bold">
+            스택 직접 입력 <span className="transition group-hover:text-[var(--raspberry)]">→</span>
+          </p>
           <p className="mt-1 text-sm text-muted-foreground">
             이력서 없이 기술만 골라서 시장 수요와 격차 보기
           </p>
