@@ -13,496 +13,320 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; background: #f4f4f2; }
-  a { color: #111110; }
-  a:hover { color: #6b6b66; }
+  body { margin: 0; background: #F4F5F6; }
+  a { color: #28272A; }
+  a:hover { color: #F32859; }
 </style>
 </helmet>
 
-<section style="padding: 72px 64px 40px; font-family: 'Gothic A1', sans-serif; color: #111110;">
+<section style="padding: 72px 64px 40px; font-family: 'Gothic A1', sans-serif; color: #28272A;">
   <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 48px; max-width: 760px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8a83;">turn 2 — 텍스트 이모티콘 ㅌㅅㅌ</div>
-    <div style="font-size: 40px; font-weight: 900; letter-spacing: -0.03em;">ㄱㅌㅅㅌ</div>
-    <div style="font-size: 16px; line-height: 1.65; color: #4a4a45; text-wrap: pretty;">간택스택의 초성은 ㄱ·ㅌ·ㅅ·ㅌ입니다. 앞의 ㄱ만 떼면 남는 세 글자가 그대로 ㅌㅅㅌ — 이름 안에 이미 표정이 들어 있습니다. 눈 ㅌ은 지표 막대와 같은 3단 획이라 turn 1의 데이터 성격도 유지됩니다.</div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #6E7075;">간택스택 · 로고</div>
+    <div style="font-size: 40px; font-weight: 900; letter-spacing: -0.03em;">ㄱ이 머리다</div>
+    <div style="font-size: 16px; line-height: 1.65; color: #4A4B4F; text-wrap: pretty;">ㄱ의 가로획이 이마, 세로획이 오른쪽 윤곽이 되고 그 안에 ㅌㅅㅌ가 들어갑니다. 세로획은 입 끝 높이에서 멈추고, 수염은 얼굴 쪽을 고정점으로 바깥으로 벌어집니다. 획은 전부 같은 굵기, 끝은 둥글게.</div>
   </div>
 
   <div style="display: flex; flex-wrap: wrap; gap: 28px;">
 
-    <!-- 2a -->
-    <div id="2a" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">2a</div>
-        <div style="font-size: 17px; font-weight: 700;">얼굴 심볼</div>
-        <div style="font-size: 13px; color: #8a8a83;">ㅌㅅㅌ 그 자체</div>
+    <div id="mark" style="width: 620px; background: #fff; border: 1px solid #E5E6E8; display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #EDEEF0;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #28272A; color: #fff; padding: 4px 8px;">MARK</div>
+        <div style="font-size: 17px; font-weight: 700;">기본형</div>
+        <div style="font-size: 13px; color: #6E7075;">획 12개</div>
       </div>
-
-      <div style="padding: 68px 32px; display: flex; align-items: center; justify-content: center; color: #111110;">
-        <div style="position: relative; width: 1em; height: 0.62em; font-size: 180px;">
-          <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-          <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-        </div>
-      </div>
-
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">흘겨보는 눈 두 쌍과 삐진 입. 눈의 3단 획이 막대 지표와 같은 어휘라서, 귀엽지만 데이터 서비스라는 인상이 깨지지 않습니다.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="position: relative; width: 1em; height: 0.62em; font-size: 72px;">
-              <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-            </div>
+      <div style="padding: 78px 32px; display: flex; align-items: center; justify-content: center; background: #F4F5F6; color: #28272A;">
+        <div style="position: relative; width: 1.2em; height: 0.66em; font-size: 210px;">
+          <div style="position: absolute; left: 0.2em; top: 0; width: 0.8em; height: 0.038em; background: currentColor; border-radius: {{ barR }};"></div>
+          <div style="position: absolute; left: 0.962em; top: 0; width: 0.038em; height: 0.6em; background: currentColor; border-radius: {{ barR }};"></div>
+          <div style="position: absolute; left: 0.28em; top: 0.14em; width: 0.19em; height: 0.19em;">
+            <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0; top: 0.078em; width: 0.19em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0; top: 0.156em; width: 0.19em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0; top: 0; width: 0.034em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
           </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center;">
-            <div style="position: relative; width: 1em; height: 0.62em; font-size: 34px;">
-              <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-            </div>
+          <div style="position: absolute; left: 0.62em; top: 0.14em; width: 0.19em; height: 0.19em;">
+            <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0; top: 0.078em; width: 0.19em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0; top: 0.156em; width: 0.19em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0; top: 0; width: 0.034em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
           </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">34PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="position: relative; width: 1em; height: 0.62em; font-size: 80px;">
-              <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
+          <div style="position: absolute; left: 0.526em; top: 0.4em; width: 0.038em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-27deg); transform-origin: top center;"></div>
+          <div style="position: absolute; left: 0.526em; top: 0.4em; width: 0.038em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(27deg); transform-origin: top center;"></div>
+          <div style="position: absolute; left: 0.02em; top: 0.27em; width: 0.16em; height: 0.028em; background: currentColor; border-radius: {{ barR }}; transform: rotate(22deg); transform-origin: right center;"></div>
+          <div style="position: absolute; left: 0.02em; top: 0.35em; width: 0.16em; height: 0.028em; background: currentColor; border-radius: {{ barR }};"></div>
+          <div style="position: absolute; left: 0.02em; top: 0.43em; width: 0.16em; height: 0.028em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-22deg); transform-origin: right center;"></div>
+          <div style="position: absolute; right: 0.02em; top: 0.27em; width: 0.16em; height: 0.028em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-22deg); transform-origin: left center;"></div>
+          <div style="position: absolute; right: 0.02em; top: 0.35em; width: 0.16em; height: 0.028em; background: currentColor; border-radius: {{ barR }};"></div>
+          <div style="position: absolute; right: 0.02em; top: 0.43em; width: 0.16em; height: 0.028em; background: currentColor; border-radius: {{ barR }}; transform: rotate(22deg); transform-origin: left center;"></div>
         </div>
       </div>
-      </sc-if>
+      <div style="padding: 22px 32px 24px; font-size: 14px; line-height: 1.6; color: #4A4B4F;">닫힌 윤곽이 없어 가볍고, 눈의 3단 획은 지표 막대와 같은 어휘입니다. 귀·볼터치 없이 ㄱ의 꺾임이 실루엣을 만듭니다.</div>
     </div>
 
-    <!-- 2b -->
-    <div id="2b" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">2b</div>
-        <div style="font-size: 17px; font-weight: 700;">얼굴 + 글자</div>
-        <div style="font-size: 13px; color: #8a8a83;">웹 헤더 · 간판용 조합</div>
+    <div id="usage" style="width: 620px; background: #fff; border: 1px solid #E5E6E8; display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #EDEEF0;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #28272A; color: #fff; padding: 4px 8px;">USE</div>
+        <div style="font-size: 17px; font-weight: 700;">적용</div>
+        <div style="font-size: 13px; color: #6E7075;">아이콘 · 조합 · 최소 크기</div>
       </div>
-
-      <div style="padding: 64px 32px; display: flex; align-items: center; justify-content: center; gap: 26px; color: #111110;">
-        <div style="position: relative; width: 1em; height: 0.62em; font-size: 96px;">
-          <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-          <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
+      <div style="padding: 32px; display: flex; flex-direction: column; gap: 26px; background: #F4F5F6;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #28272A; color: #FEFEFE; display: flex; align-items: center; justify-content: center; flex: none;">
+            <div style="position: relative; width: 1.2em; height: 0.66em; font-size: 74px;">
+              <div style="position: absolute; left: 0.2em; top: 0; width: 0.8em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0.95em; top: 0; width: 0.05em; height: 0.6em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0.28em; top: 0.15em; width: 0.19em; height: 0.19em;">
+                <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.073em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.145em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 0.045em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+              </div>
+              <div style="position: absolute; left: 0.62em; top: 0.15em; width: 0.19em; height: 0.19em;">
+                <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.073em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.145em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 0.045em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+              </div>
+              <div style="position: absolute; left: 0.522em; top: 0.4em; width: 0.05em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-27deg); transform-origin: top center;"></div>
+              <div style="position: absolute; left: 0.522em; top: 0.4em; width: 0.05em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(27deg); transform-origin: top center;"></div>
+              <div style="position: absolute; left: 0.02em; top: 0.28em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(20deg); transform-origin: right center;"></div>
+              <div style="position: absolute; left: 0.02em; top: 0.4em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-20deg); transform-origin: right center;"></div>
+              <div style="position: absolute; right: 0.02em; top: 0.28em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-20deg); transform-origin: left center;"></div>
+              <div style="position: absolute; right: 0.02em; top: 0.4em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(20deg); transform-origin: left center;"></div>
+            </div>
+          </div>
+          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #F32859; color: #FEFEFE; display: flex; align-items: center; justify-content: center; flex: none;">
+            <div style="position: relative; width: 1.2em; height: 0.66em; font-size: 74px;">
+              <div style="position: absolute; left: 0.2em; top: 0; width: 0.8em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0.95em; top: 0; width: 0.05em; height: 0.6em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0.28em; top: 0.15em; width: 0.19em; height: 0.19em;">
+                <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.073em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.145em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 0.045em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+              </div>
+              <div style="position: absolute; left: 0.62em; top: 0.15em; width: 0.19em; height: 0.19em;">
+                <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.073em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0.145em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 0.045em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+              </div>
+              <div style="position: absolute; left: 0.522em; top: 0.4em; width: 0.05em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-27deg); transform-origin: top center;"></div>
+              <div style="position: absolute; left: 0.522em; top: 0.4em; width: 0.05em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(27deg); transform-origin: top center;"></div>
+              <div style="position: absolute; left: 0.02em; top: 0.28em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(20deg); transform-origin: right center;"></div>
+              <div style="position: absolute; left: 0.02em; top: 0.4em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-20deg); transform-origin: right center;"></div>
+              <div style="position: absolute; right: 0.02em; top: 0.28em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-20deg); transform-origin: left center;"></div>
+              <div style="position: absolute; right: 0.02em; top: 0.4em; width: 0.15em; height: 0.04em; background: currentColor; border-radius: {{ barR }}; transform: rotate(20deg); transform-origin: left center;"></div>
+            </div>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; line-height: 1.7; color: #6E7075;">APP ICON<br>수염 2가닥으로 축약</div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 7px;">
-          <div style="font-size: 44px; font-weight: 900; letter-spacing: -0.045em; line-height: 1;">간택스택</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #8a8a83;">시장이 간택하는 스택</div>
+
+        <div style="display: flex; align-items: center; gap: 24px; padding: 26px 0; border-top: 1px solid #E5E6E8; border-bottom: 1px solid #E5E6E8; color: #28272A;">
+          <div style="position: relative; width: 1.2em; height: 0.66em; font-size: 86px; flex: none;">
+            <div style="position: absolute; left: 0.2em; top: 0; width: 0.8em; height: 0.044em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0.956em; top: 0; width: 0.044em; height: 0.6em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0.28em; top: 0.15em; width: 0.19em; height: 0.19em;">
+              <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.04em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.075em; width: 0.19em; height: 0.04em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.15em; width: 0.19em; height: 0.04em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0; width: 0.04em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+            </div>
+            <div style="position: absolute; left: 0.62em; top: 0.15em; width: 0.19em; height: 0.19em;">
+              <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.04em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.075em; width: 0.19em; height: 0.04em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.15em; width: 0.19em; height: 0.04em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0; width: 0.04em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+            </div>
+            <div style="position: absolute; left: 0.524em; top: 0.4em; width: 0.044em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-27deg); transform-origin: top center;"></div>
+            <div style="position: absolute; left: 0.524em; top: 0.4em; width: 0.044em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(27deg); transform-origin: top center;"></div>
+            <div style="position: absolute; left: 0.02em; top: 0.27em; width: 0.15em; height: 0.034em; background: currentColor; border-radius: {{ barR }}; transform: rotate(22deg); transform-origin: right center;"></div>
+            <div style="position: absolute; left: 0.02em; top: 0.35em; width: 0.15em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0.02em; top: 0.43em; width: 0.15em; height: 0.034em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-22deg); transform-origin: right center;"></div>
+            <div style="position: absolute; right: 0.02em; top: 0.27em; width: 0.15em; height: 0.034em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-22deg); transform-origin: left center;"></div>
+            <div style="position: absolute; right: 0.02em; top: 0.35em; width: 0.15em; height: 0.034em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; right: 0.02em; top: 0.43em; width: 0.15em; height: 0.034em; background: currentColor; border-radius: {{ barR }}; transform: rotate(22deg); transform-origin: left center;"></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="font-size: 38px; font-weight: 900; letter-spacing: -0.045em; line-height: 1;">간택스택</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #6E7075;">시장이 간택하는 스택</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 22px; color: #28272A;">
+          <div style="position: relative; width: 1.2em; height: 0.66em; font-size: 56px; flex: none;">
+            <div style="position: absolute; left: 0.2em; top: 0; width: 0.8em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0.95em; top: 0; width: 0.05em; height: 0.6em; background: currentColor; border-radius: {{ barR }};"></div>
+            <div style="position: absolute; left: 0.28em; top: 0.15em; width: 0.19em; height: 0.19em;">
+              <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.073em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.145em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0; width: 0.045em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+            </div>
+            <div style="position: absolute; left: 0.62em; top: 0.15em; width: 0.19em; height: 0.19em;">
+              <div style="position: absolute; left: 0; top: 0; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.073em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0.145em; width: 0.19em; height: 0.045em; background: currentColor; border-radius: {{ barR }};"></div>
+              <div style="position: absolute; left: 0; top: 0; width: 0.045em; height: 0.19em; background: currentColor; border-radius: {{ barR }};"></div>
+            </div>
+            <div style="position: absolute; left: 0.522em; top: 0.4em; width: 0.05em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-27deg); transform-origin: top center;"></div>
+            <div style="position: absolute; left: 0.522em; top: 0.4em; width: 0.05em; height: 0.18em; background: currentColor; border-radius: {{ barR }}; transform: rotate(27deg); transform-origin: top center;"></div>
+            <div style="position: absolute; left: 0.02em; top: 0.28em; width: 0.15em; height: 0.045em; background: currentColor; border-radius: {{ barR }}; transform: rotate(20deg); transform-origin: right center;"></div>
+            <div style="position: absolute; left: 0.02em; top: 0.4em; width: 0.15em; height: 0.045em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-20deg); transform-origin: right center;"></div>
+            <div style="position: absolute; right: 0.02em; top: 0.28em; width: 0.15em; height: 0.045em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-20deg); transform-origin: left center;"></div>
+            <div style="position: absolute; right: 0.02em; top: 0.4em; width: 0.15em; height: 0.045em; background: currentColor; border-radius: {{ barR }}; transform: rotate(20deg); transform-origin: left center;"></div>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; line-height: 1.7; color: #6E7075;">MIN 56PX · 눈 3단 유지<br>수염 2가닥, 획 굵기 상향</div>
         </div>
       </div>
-
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">얼굴은 왼쪽에 고정. 간판에서는 얼굴만 크게, 웹 헤더에서는 이 조합을 씁니다. 얼굴 높이와 글자 x높이를 맞춰 정렬 기준을 하나로 뒀습니다.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px;">
-            <div style="position: relative; width: 1em; height: 0.62em; font-size: 54px;">
-              <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; letter-spacing: -0.03em;">간택스택</div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center; gap: 9px;">
-            <div style="position: relative; width: 1em; height: 0.62em; font-size: 22px;">
-              <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-            </div>
-            <div style="font-size: 17px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">17PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center; gap: 16px;">
-            <div style="position: relative; width: 1em; height: 0.62em; font-size: 48px;">
-              <div style="position: absolute; left: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.02em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.11em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; right: 0; top: 0.2em; width: 0.26em; height: 0.05em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; right: 0.21em; top: 0.02em; width: 0.05em; height: 0.23em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-24deg); transform-origin: top center;"></div>
-              <div style="position: absolute; left: 0.47em; top: 0.33em; width: 0.06em; height: 0.24em; background: currentColor; border-radius: {{ barR }}; transform: rotate(24deg); transform-origin: top center;"></div>
-            </div>
-            <div style="font-size: 26px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
-        </div>
-      </div>
-      </sc-if>
+      <div style="padding: 22px 32px 24px; font-size: 14px; line-height: 1.6; color: #4A4B4F;">작아질수록 획만 굵히고 구조는 그대로 둡니다. 눈은 어떤 크기에서도 3단입니다.</div>
     </div>
 
-    <!-- 2c -->
-    <div id="2c" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">2c</div>
-        <div style="font-size: 17px; font-weight: 700;">타이핑한 그대로</div>
-        <div style="font-size: 13px; color: #8a8a83;">(ㅌㅅㅌ) 워드마크</div>
+    <div id="faces" style="width: 1268px; background: #fff; border: 1px solid #E5E6E8;">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #EDEEF0;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #28272A; color: #fff; padding: 4px 8px;">FACES</div>
+        <div style="font-size: 17px; font-weight: 700;">표정 세트</div>
+        <div style="font-size: 13px; color: #6E7075;">서비스 상태에 1:1로 매핑</div>
       </div>
-
-      <div style="padding: 60px 32px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-        <div style="display: flex; align-items: center; gap: 0.04em; font-size: 88px; font-weight: 700; letter-spacing: 0.02em; line-height: 1;">
-          <span style="font-weight: 400; color: #8a8a83;">(</span>
-          <span>ㅌㅅㅌ</span>
-          <span style="font-weight: 400; color: #8a8a83;">)</span>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #EDEEF0;">
+        <div style="background: #fff; padding: 36px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="font-size: 44px; font-weight: 700; letter-spacing: 0.02em;">ㅌㅅㅌ</div>
+          <div style="font-size: 15px; font-weight: 700;">뚱함 · 기본</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; text-align: center;">격차가 큰 스택을 보여줄 때. 로고 기본형이자 앱 아이콘.</div>
         </div>
-        <div style="font-size: 26px; font-weight: 900; letter-spacing: -0.045em;">간택스택</div>
+        <div style="background: #fff; padding: 36px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="font-size: 44px; font-weight: 700; letter-spacing: 0.02em;">ㅡㅅㅡ</div>
+          <div style="font-size: 15px; font-weight: 700;">체념 · 대기</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; text-align: center;">공고 수집 중, 분석 중. 로딩과 빈 화면.</div>
+        </div>
+        <div style="background: #fff; padding: 36px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="font-size: 44px; font-weight: 700; letter-spacing: 0.02em;">ㅇㅅㅇ</div>
+          <div style="font-size: 15px; font-weight: 700;">놀람 · 발견</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; text-align: center;">새 요구 기술 급상승, 예상 밖 인사이트 알림.</div>
+        </div>
+        <div style="background: #fff; padding: 36px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="font-size: 44px; font-weight: 700; letter-spacing: 0.02em;">^ㅅ^</div>
+          <div style="font-size: 15px; font-weight: 700;">만족 · 달성</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; text-align: center;">격차가 메워졌을 때. 완료 상태에만 쓰고 남용 금지.</div>
+        </div>
       </div>
+      <div style="padding: 20px 32px; font-size: 14px; line-height: 1.6; color: #4A4B4F; border-top: 1px solid #EDEEF0;">입 ㅅ은 고정, 눈만 바꿉니다. 로고로 쓰는 것은 ㅌㅅㅌ 하나뿐이고 나머지는 UI 상태 표시용입니다.</div>
+    </div>
 
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">마크를 그리지 않고 글자를 그대로 씁니다. 사용자가 채팅창에 직접 타이핑할 수 있는 로고라서, 커뮤니티에서 그대로 퍼질 수 있습니다. 회색 괄호는 얼굴 윤곽 역할.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; letter-spacing: 0.02em;">ㅌㅅㅌ</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON</div>
+    <div id="color" style="width: 1268px; background: #fff; border: 1px solid #E5E6E8;">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #EDEEF0;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #28272A; color: #fff; padding: 4px 8px;">COLOR</div>
+        <div style="font-size: 17px; font-weight: 700;">컬러</div>
+        <div style="font-size: 13px; color: #6E7075;">차콜 3단 + 라즈베리 1</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #EDEEF0;">
+        <div style="background: #fff; padding: 28px;">
+          <div style="height: 120px; background: #28272A; border-radius: 6px;"></div>
+          <div style="margin-top: 16px; font-size: 16px; font-weight: 700;">Ink</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7075; margin-top: 6px; line-height: 1.7;">#28272A</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; margin-top: 10px;">본문·로고 기본색. 순수 검정보다 살짝 밝은 차콜.</div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center; gap: 8px;">
-            <div style="font-size: 17px; font-weight: 700; letter-spacing: 0.02em;">(ㅌㅅㅌ)</div>
-            <div style="font-size: 17px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
+        <div style="background: #fff; padding: 28px;">
+          <div style="height: 120px; background: #FEFEFE; border: 1px solid #E5E6E8; border-radius: 6px; box-sizing: border-box;"></div>
+          <div style="margin-top: 16px; font-size: 16px; font-weight: 700;">Paper</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7075; margin-top: 6px; line-height: 1.7;">#FEFEFE · #F4F5F6</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; margin-top: 10px;">카드는 #FEFEFE, 그 아래 바탕은 #F4F5F6.</div>
+        </div>
+        <div style="background: #fff; padding: 28px;">
+          <div style="height: 120px; background: #E5E6E8; border-radius: 6px;"></div>
+          <div style="margin-top: 16px; font-size: 16px; font-weight: 700;">Line</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7075; margin-top: 6px; line-height: 1.7;">#E5E6E8 · #6E7075</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; margin-top: 10px;">경계선과 보조 텍스트. 그림자보다 선을 씁니다.</div>
+        </div>
+        <div style="background: #fff; padding: 28px;">
+          <div style="height: 120px; background: #F32859; border-radius: 6px; display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box;"><span style="font-size: 14px; font-weight: 700; color: #FEFEFE;">White on Raspberry</span></div>
+          <div style="margin-top: 16px; font-size: 16px; font-weight: 700;">Raspberry — 단 하나의 액센트</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7075; margin-top: 6px; line-height: 1.7;">#F32859</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; margin-top: 10px;">강조 버튼, 상승 지표, 알림. 한 화면에 한 곳만.</div>
+        </div>
+        <div style="background: #fff; padding: 28px;">
+          <div style="height: 120px; background: #313538; border-radius: 6px; display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box;"><span style="font-size: 14px; font-weight: 700; color: #FEFEFE;">White on Surface</span></div>
+          <div style="margin-top: 16px; font-size: 16px; font-weight: 700;">Charcoal — 3단</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7075; margin-top: 6px; line-height: 1.7;">#313538 · #3A3B3F</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #4A4B4F; margin-top: 10px;">어두운 면과 카드. 두 단계 차이로 깊이를 만들고 그림자는 쓰지 않습니다.</div>
+        </div>
+        <div style="background: #fff; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-size: 16px; font-weight: 700;">규칙</div>
+          <div style="font-size: 13px; line-height: 1.75; color: #4A4B4F;">액센트는 라즈베리 하나뿐입니다. 라즈베리 위 글자는 항상 #FEFEFE, 본문 글자색으로는 쓰지 않습니다. 차콜은 #28272A → #313538 → #3A3B3F 순서로만 겹치고, 그라디언트와 그림자는 쓰지 않습니다.</div>
+          <div style="margin-top: 4px; display: flex; gap: 8px;">
+            <div style="flex: 1; height: 44px; background: #28272A; color: #FEFEFE; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; border-radius: 6px;">기본 버튼</div>
+            <div style="flex: 1; height: 44px; background: #F32859; color: #FEFEFE; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; border-radius: 6px;">강조 버튼</div>
+            <div style="flex: 1; height: 44px; border: 1.5px solid #28272A; color: #28272A; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; border-radius: 6px; box-sizing: border-box;">보조 버튼</div>
           </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">17PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center; gap: 14px;">
-            <div style="font-size: 30px; font-weight: 700; letter-spacing: 0.02em;">(ㅌㅅㅌ)</div>
-            <div style="font-size: 26px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
         </div>
       </div>
-      </sc-if>
+    </div>
+
+    <div id="type" style="width: 620px; background: #fff; border: 1px solid #E5E6E8;">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #EDEEF0;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #28272A; color: #fff; padding: 4px 8px;">TYPE</div>
+        <div style="font-size: 17px; font-weight: 700;">타이포</div>
+        <div style="font-size: 13px; color: #6E7075;">Gothic A1 + JetBrains Mono</div>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <div style="padding: 22px 32px; border-bottom: 1px solid #EDEEF0; display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
+          <div style="font-size: 40px; font-weight: 900; letter-spacing: -0.04em;">시장이 간택하는 스택</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E7075; white-space: nowrap;">900 · 40/1.15 · -4%</div>
+        </div>
+        <div style="padding: 22px 32px; border-bottom: 1px solid #EDEEF0; display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
+          <div style="font-size: 26px; font-weight: 700; letter-spacing: -0.03em;">내 스택은 어디가 비었나</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E7075; white-space: nowrap;">700 · 26/1.3</div>
+        </div>
+        <div style="padding: 22px 32px; border-bottom: 1px solid #EDEEF0; display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
+          <div style="font-size: 16px; font-weight: 400; line-height: 1.7; color: #28272A;">채용공고 12,480건을 분석해 요구 기술을 문장 단위로 추출합니다. 표면 키워드가 아니라 실제 요구 조건을 봅니다.</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E7075; white-space: nowrap;">400 · 16/1.7</div>
+        </div>
+        <div style="padding: 22px 32px; display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #28272A;">SSR · 대규모 트래픽 · +38% YoY</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E7075; white-space: nowrap;">MONO 13 · 수치/기술명</div>
+        </div>
+      </div>
+      <div style="padding: 20px 32px; font-size: 14px; line-height: 1.6; color: #4A4B4F; border-top: 1px solid #EDEEF0; background: #F4F5F6;">제목은 900만, 본문은 400만 씁니다. 숫자와 기술명은 전부 Mono로 고정해 데이터와 말을 시각적으로 분리합니다.</div>
+    </div>
+
+    <div id="voice" style="width: 620px; background: #fff; border: 1px solid #E5E6E8;">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #EDEEF0;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #28272A; color: #fff; padding: 4px 8px;">VOICE</div>
+        <div style="font-size: 17px; font-weight: 700;">보이스 · 로고 사용</div>
+      </div>
+      <div style="padding: 26px 32px; display: flex; flex-direction: column; gap: 22px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 15px; font-weight: 700;">말투</div>
+          <div style="font-size: 14px; line-height: 1.7; color: #4A4B4F;">데이터는 건조하게, 반응은 고양이가 합니다. 숫자와 사실은 꾸미지 않고 그대로 두고, 감정은 표정과 짧은 한마디로만 표현합니다.</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: #28272A; padding-top: 3px;">GOOD</div>
+            <div style="font-size: 14px; line-height: 1.6;">SSR 요구가 1년 전보다 38% 늘었습니다. 당신 스택에는 없습니다. ㅌㅅㅌ</div>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: #6E7075; padding-top: 3px;">BAD</div>
+            <div style="font-size: 14px; line-height: 1.6; color: #6E7075;">지금 당장 SSR을 배우세요! 시장이 당신을 기다리지 않아요</div>
+          </div>
+        </div>
+        <div style="height: 1px; background: #EDEEF0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 15px; font-weight: 700;">로고 사용 규정</div>
+          <div style="font-size: 14px; line-height: 1.8; color: #4A4B4F;">여백은 ㄱ 세로획 굵기의 네 배를 사방에 확보합니다. 최소 크기는 화면 56px, 인쇄 16mm. 그 아래로는 획만 굵히고 눈은 어떤 크기에서도 3단을 유지합니다. 표정을 임의로 바꾸지 않고, 마크를 기울이거나 늘리지 않습니다. 배경은 Paper·Ink·라즈베리 단색 위에만 올립니다.</div>
+        </div>
+      </div>
     </div>
 
   </div>
-
-  <div style="margin-top: 44px; font-size: 14px; line-height: 1.7; color: #4a4a45; max-width: 760px;"><a href="#2a">2a</a>는 아이콘 힘이 가장 세고, <a href="#2c">2c</a>는 손으로 타이핑 가능한 대신 폰트에 의존합니다. 표정을 더 뚱하게/새침하게 조절하거나 눈을 ㅡㅅㅡ, ㅇㅅㅇ 같은 변형 세트로 확장하는 것도 가능합니다.</div>
-</section>
-
-<section style="padding: 40px 64px 120px; font-family: 'Gothic A1', sans-serif; color: #111110;">
-  <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 48px; max-width: 760px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8a83;">turn 1 — 로고 시안</div>
-    <div style="font-size: 40px; font-weight: 900; letter-spacing: -0.03em;">간택스택</div>
-    <div style="font-size: 16px; line-height: 1.65; color: #4a4a45; text-wrap: pretty;">형태별로 네 방향. 흑백 중립으로, 색은 나중에 입힐 수 있게 뒀습니다. 심볼은 지표(막대)와 초성(ㄱㅌㅅ) 두 갈래로 갈라놨고, 각 시안마다 앱 아이콘·작은 크기·반전을 같이 확인할 수 있습니다.</div>
-  </div>
-
-  <div style="display: flex; flex-wrap: wrap; gap: 28px;">
-
-    <!-- 1a 워드마크 -->
-    <div id="1a" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">1a</div>
-        <div style="font-size: 17px; font-weight: 700;">워드마크</div>
-        <div style="font-size: 13px; color: #8a8a83;">글자만, 마크 없음</div>
-      </div>
-
-      <div style="padding: 64px 32px; display: flex; flex-direction: column; align-items: center; gap: 18px;">
-        <div style="font-size: 64px; font-weight: 900; letter-spacing: -0.045em; line-height: 1;">간택스택</div>
-        <div style="display: flex; align-items: flex-end; gap: 6px; height: 10px;">
-          <div style="width: 34px; height: 4px; background: #111110; border-radius: {{ barR }};"></div>
-          <div style="width: 34px; height: 7px; background: #111110; border-radius: {{ barR }};"></div>
-          <div style="width: 34px; height: 10px; background: #111110; border-radius: {{ barR }};"></div>
-        </div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.34em; color: #8a8a83; padding-left: 0.34em;">GANTAEKSTACK</div>
-      </div>
-
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">글자 자체를 마크로 씁니다. 밑단의 3단 막대는 지표를 암시하는 최소 장치로, 필요하면 떼어내도 로고가 성립합니다.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 56px; font-weight: 900; letter-spacing: -0.04em;">간</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center;"><div style="font-size: 17px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div></div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">17PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
-        </div>
-      </div>
-      </sc-if>
-    </div>
-
-    <!-- 1b 심볼 + 글자 -->
-    <div id="1b" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">1b</div>
-        <div style="font-size: 17px; font-weight: 700;">심볼 + 글자</div>
-        <div style="font-size: 13px; color: #8a8a83;">지표 · 가로 조합</div>
-      </div>
-
-      <div style="padding: 64px 32px; display: flex; align-items: center; justify-content: center; gap: 22px; color: #111110;">
-        <div style="position: relative; width: 1em; height: 1em; font-size: 72px;">
-          <div style="position: absolute; left: 0; top: 0; width: 0.1em; height: 1em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.1em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0.22em; bottom: 0.1em; width: 0.16em; height: 0.3em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0.46em; bottom: 0.1em; width: 0.16em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-          <div style="position: absolute; left: 0.7em; bottom: 0.1em; width: 0.16em; height: 0.78em; background: currentColor; border-radius: {{ barR }};"></div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 6px;">
-          <div style="font-size: 44px; font-weight: 900; letter-spacing: -0.045em; line-height: 1;">간택스택</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; color: #8a8a83;">MARKET-PICKED STACK</div>
-        </div>
-      </div>
-
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">축 위에 오르는 3단 막대. 시장 수요의 크기를 그대로 읽히게 하고, 축을 빼면 막대만으로도 쓸 수 있습니다.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="position: relative; width: 1em; height: 1em; font-size: 54px;">
-              <div style="position: absolute; left: 0; top: 0; width: 0.1em; height: 1em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.1em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.22em; bottom: 0.1em; width: 0.16em; height: 0.3em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.46em; bottom: 0.1em; width: 0.16em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.7em; bottom: 0.1em; width: 0.16em; height: 0.78em; background: currentColor; border-radius: {{ barR }};"></div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center; gap: 7px;">
-            <div style="position: relative; width: 1em; height: 1em; font-size: 20px;">
-              <div style="position: absolute; left: 0; top: 0; width: 0.1em; height: 1em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.1em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.22em; bottom: 0.1em; width: 0.16em; height: 0.3em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.46em; bottom: 0.1em; width: 0.16em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.7em; bottom: 0.1em; width: 0.16em; height: 0.78em; background: currentColor; border-radius: {{ barR }};"></div>
-            </div>
-            <div style="font-size: 17px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">17PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center; gap: 14px;">
-            <div style="position: relative; width: 1em; height: 1em; font-size: 38px;">
-              <div style="position: absolute; left: 0; top: 0; width: 0.1em; height: 1em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.1em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.22em; bottom: 0.1em; width: 0.16em; height: 0.3em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.46em; bottom: 0.1em; width: 0.16em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0.7em; bottom: 0.1em; width: 0.16em; height: 0.78em; background: currentColor; border-radius: {{ barR }};"></div>
-            </div>
-            <div style="font-size: 28px; font-weight: 900; letter-spacing: -0.04em;">간택스택</div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
-        </div>
-      </div>
-      </sc-if>
-    </div>
-
-    <!-- 1c 심볼만 -->
-    <div id="1c" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">1c</div>
-        <div style="font-size: 17px; font-weight: 700;">심볼만</div>
-        <div style="font-size: 13px; color: #8a8a83;">격차를 보여주는 두 막대</div>
-      </div>
-
-      <div style="padding: 56px 32px; display: flex; align-items: center; justify-content: center; color: #111110;">
-        <div style="position: relative; width: 1em; height: 1em; font-size: 128px;">
-          <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.09em; background: currentColor; border-radius: {{ blockR }};"></div>
-          <div style="position: absolute; left: 0.08em; bottom: 0.09em; width: 0.3em; height: 0.42em; background: currentColor; border-radius: {{ blockR }};"></div>
-          <div style="position: absolute; left: 0.5em; bottom: 0.09em; width: 0.3em; height: 0.42em; border: 0.1em solid currentColor; border-radius: {{ blockR }}; box-sizing: border-box;"></div>
-          <div style="position: absolute; left: 0.5em; bottom: 0.57em; width: 0.3em; height: 0.34em; background: currentColor; border-radius: {{ blockR }};"></div>
-        </div>
-      </div>
-
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">채운 막대는 내 스택, 빈 막대는 비어 있는 구간. 위로 얹힌 블록이 시장이 더 요구하는 만큼입니다. 격차 자체가 마크가 됩니다.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="position: relative; width: 1em; height: 1em; font-size: 56px;">
-              <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.09em; background: currentColor; border-radius: {{ blockR }};"></div>
-              <div style="position: absolute; left: 0.08em; bottom: 0.09em; width: 0.3em; height: 0.42em; background: currentColor; border-radius: {{ blockR }};"></div>
-              <div style="position: absolute; left: 0.5em; bottom: 0.09em; width: 0.3em; height: 0.42em; border: 0.1em solid currentColor; border-radius: {{ blockR }}; box-sizing: border-box;"></div>
-              <div style="position: absolute; left: 0.5em; bottom: 0.57em; width: 0.3em; height: 0.34em; background: currentColor; border-radius: {{ blockR }};"></div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center;">
-            <div style="position: relative; width: 1em; height: 1em; font-size: 22px;">
-              <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.09em; background: currentColor; border-radius: {{ blockR }};"></div>
-              <div style="position: absolute; left: 0.08em; bottom: 0.09em; width: 0.3em; height: 0.42em; background: currentColor; border-radius: {{ blockR }};"></div>
-              <div style="position: absolute; left: 0.5em; bottom: 0.09em; width: 0.3em; height: 0.42em; border: 0.1em solid currentColor; border-radius: {{ blockR }}; box-sizing: border-box;"></div>
-              <div style="position: absolute; left: 0.5em; bottom: 0.57em; width: 0.3em; height: 0.34em; background: currentColor; border-radius: {{ blockR }};"></div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">22PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="position: relative; width: 1em; height: 1em; font-size: 60px;">
-              <div style="position: absolute; left: 0; bottom: 0; width: 1em; height: 0.09em; background: currentColor; border-radius: {{ blockR }};"></div>
-              <div style="position: absolute; left: 0.08em; bottom: 0.09em; width: 0.3em; height: 0.42em; background: currentColor; border-radius: {{ blockR }};"></div>
-              <div style="position: absolute; left: 0.5em; bottom: 0.09em; width: 0.3em; height: 0.42em; border: 0.1em solid currentColor; border-radius: {{ blockR }}; box-sizing: border-box;"></div>
-              <div style="position: absolute; left: 0.5em; bottom: 0.57em; width: 0.3em; height: 0.34em; background: currentColor; border-radius: {{ blockR }};"></div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
-        </div>
-      </div>
-      </sc-if>
-    </div>
-
-    <!-- 1d 모노그램 -->
-    <div id="1d" style="width: 620px; background: #fff; border: 1px solid #e2e2dd; display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: baseline; gap: 14px; padding: 24px 32px; border-bottom: 1px solid #ededea;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; background: #111110; color: #fff; padding: 4px 8px;">1d</div>
-        <div style="font-size: 17px; font-weight: 700;">모노그램</div>
-        <div style="font-size: 13px; color: #8a8a83;">초성 ㄱ · ㅌ · ㅅ</div>
-      </div>
-
-      <div style="padding: 56px 32px; display: flex; flex-direction: column; align-items: center; gap: 26px; color: #111110;">
-        <div style="display: flex; align-items: flex-end; gap: 0.2em; font-size: 104px;">
-          <div style="position: relative; width: 0.52em; height: 0.52em;">
-            <div style="position: absolute; left: 0; top: 0; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-            <div style="position: absolute; right: 0; top: 0; width: 0.12em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-          </div>
-          <div style="position: relative; width: 0.52em; height: 0.52em;">
-            <div style="position: absolute; left: 0; top: 0; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-            <div style="position: absolute; left: 0; top: 0.2em; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-            <div style="position: absolute; left: 0; top: 0.4em; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0; width: 0.12em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-          </div>
-          <div style="position: relative; width: 0.52em; height: 0.52em;">
-            <div style="position: absolute; left: 0.2em; top: 0; width: 0.12em; height: 0.55em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-21deg); transform-origin: top center;"></div>
-            <div style="position: absolute; left: 0.2em; top: 0; width: 0.12em; height: 0.55em; background: currentColor; border-radius: {{ barR }}; transform: rotate(21deg); transform-origin: top center;"></div>
-          </div>
-        </div>
-        <div style="font-size: 20px; font-weight: 700; letter-spacing: 0.06em; color: #4a4a45;">간택스택</div>
-      </div>
-
-      <div style="padding: 0 32px 20px; font-size: 14px; line-height: 1.6; color: #4a4a45;">초성 세 자를 같은 굵기의 획으로 통일했습니다. 가운데 ㅌ은 3단 막대와 같은 형태여서, 지표 시안과 한 가족으로 묶입니다.</div>
-
-      <sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; gap: 24px; align-items: flex-end; padding: 24px 32px; border-top: 1px solid #ededea; background: #fafaf8;">
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="width: 104px; height: 104px; border-radius: {{ tileR }}; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="position: relative; width: 0.62em; height: 0.62em; font-size: 86px;">
-              <div style="position: absolute; left: 0; top: 0; width: 0.62em; height: 0.13em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.245em; width: 0.62em; height: 0.13em; background: currentColor; border-radius: {{ barR }};"></div>
-              <div style="position: absolute; left: 0; top: 0.49em; width: 0.62em; height: 0.13em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0; width: 0.13em; height: 0.62em; background: currentColor; border-radius: {{ barR }};"></div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">APP ICON (ㅌ)</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <div style="height: 104px; display: flex; align-items: center;">
-            <div style="display: flex; align-items: flex-end; gap: 0.2em; font-size: 24px;">
-              <div style="position: relative; width: 0.52em; height: 0.52em;">
-                <div style="position: absolute; left: 0; top: 0; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-                <div style="position: absolute; right: 0; top: 0; width: 0.12em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              </div>
-              <div style="position: relative; width: 0.52em; height: 0.52em;">
-                <div style="position: absolute; left: 0; top: 0; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-                <div style="position: absolute; left: 0; top: 0.2em; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-                <div style="position: absolute; left: 0; top: 0.4em; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0; width: 0.12em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              </div>
-              <div style="position: relative; width: 0.52em; height: 0.52em;">
-                <div style="position: absolute; left: 0.2em; top: 0; width: 0.12em; height: 0.55em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-21deg); transform-origin: top center;"></div>
-                <div style="position: absolute; left: 0.2em; top: 0; width: 0.12em; height: 0.55em; background: currentColor; border-radius: {{ barR }}; transform: rotate(21deg); transform-origin: top center;"></div>
-              </div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">24PX</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; flex: 1;">
-          <div style="width: 100%; height: 104px; background: #111110; color: #fff; display: flex; align-items: center; justify-content: center;">
-            <div style="display: flex; align-items: flex-end; gap: 0.2em; font-size: 56px;">
-              <div style="position: relative; width: 0.52em; height: 0.52em;">
-                <div style="position: absolute; left: 0; top: 0; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-                <div style="position: absolute; right: 0; top: 0; width: 0.12em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              </div>
-              <div style="position: relative; width: 0.52em; height: 0.52em;">
-                <div style="position: absolute; left: 0; top: 0; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-                <div style="position: absolute; left: 0; top: 0.2em; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div>
-                <div style="position: absolute; left: 0; top: 0.4em; width: 0.52em; height: 0.12em; background: currentColor; border-radius: {{ barR }};"></div><div style="position: absolute; left: 0; top: 0; width: 0.12em; height: 0.52em; background: currentColor; border-radius: {{ barR }};"></div>
-              </div>
-              <div style="position: relative; width: 0.52em; height: 0.52em;">
-                <div style="position: absolute; left: 0.2em; top: 0; width: 0.12em; height: 0.55em; background: currentColor; border-radius: {{ barR }}; transform: rotate(-21deg); transform-origin: top center;"></div>
-                <div style="position: absolute; left: 0.2em; top: 0; width: 0.12em; height: 0.55em; background: currentColor; border-radius: {{ barR }}; transform: rotate(21deg); transform-origin: top center;"></div>
-              </div>
-            </div>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a8a83;">INVERSE</div>
-        </div>
-      </div>
-      </sc-if>
-    </div>
-
-  </div>
-
-  <div style="margin-top: 44px; font-size: 14px; line-height: 1.7; color: #4a4a45; max-width: 760px;">마음에 드는 번호를 알려주시면 그 방향만 파서 다듬겠습니다. <a href="#1b">1b</a>와 <a href="#1d">1d</a>는 같은 획 굵기를 공유하니 둘을 한 세트(웹 헤더 + 앱 아이콘)로 쓰는 것도 가능합니다.</div>
 </section>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;cornerStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;둥근&quot;,&quot;각진&quot;],&quot;default&quot;:&quot;둥근&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showSpecs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;cornerStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;둥근&quot;,&quot;각진&quot;],&quot;default&quot;:&quot;둥근&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   renderVals() {
     const corner = this.props.cornerStyle ?? "둥근";
     return {
       barR: corner === "각진" ? "0px" : "999px",
       tileR: corner === "각진" ? "0px" : "24px",
-      blockR: corner === "각진" ? "0px" : "0.05em",
-      showSpecs: this.props.showSpecs ?? true,
     };
   }
 }

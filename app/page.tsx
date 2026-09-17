@@ -26,8 +26,8 @@ export default async function Home({
           <img src="/logo.svg" alt="(ㅌㅅㅌ)" className="h-6 w-6 dark:invert" />
           <p className="text-sm font-medium text-muted-foreground">간택스택</p>
         </div>
-        <h1 className="mt-1 text-4xl font-bold leading-tight tracking-tight">
-          내 이력서, <span className="underline decoration-[var(--chart-1)] decoration-4 underline-offset-4">몇 년도</span> 스택일까
+        <h1 className="mt-1 text-4xl font-black leading-[1.15] tracking-[-0.04em]">
+          내 이력서, <span className="underline decoration-[var(--raspberry)] decoration-4 underline-offset-4">몇 년도</span> 스택일까
         </h1>
         <p className="mt-3 text-muted-foreground">
           이력서를 넣으면 — AI가 스택을 읽고, 기술마다{" "}

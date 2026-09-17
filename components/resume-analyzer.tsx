@@ -33,12 +33,13 @@ import {
 
 const chartConfig = { score: { label: "내 스택 주류도", color: "var(--chart-1)" } } satisfies ChartConfig;
 
+// DS 규칙: 액센트는 라즈베리 하나 — 상승 지표에만. 나머지는 차콜 단계로.
 const TREND_LABEL: Record<string, { text: string; cls: string }> = {
-  rising: { text: "↑ 상승", cls: "text-emerald-600 dark:text-emerald-400" },
+  rising: { text: "↑ 상승", cls: "text-[var(--raspberry)] font-medium" },
   stable: { text: "→ 유지", cls: "text-muted-foreground" },
-  easing: { text: "↘ 완만한 감소", cls: "text-amber-600 dark:text-amber-400" },
-  declining: { text: "↓ 뚜렷한 감소", cls: "text-red-600 dark:text-red-400" },
-  modern: { text: "🆕 신생·현역", cls: "text-sky-600 dark:text-sky-400" },
+  easing: { text: "↘ 완만한 감소", cls: "text-muted-foreground" },
+  declining: { text: "↓ 뚜렷한 감소", cls: "text-foreground font-medium" },
+  modern: { text: "🆕 신생·현역", cls: "text-muted-foreground" },
 };
 
 const SAMPLE = `프론트엔드 개발자. jQuery와 PHP로 사내 웹 유지보수, Java Spring 백엔드 경험.
@@ -136,7 +137,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
             <button
               onClick={run}
               disabled={busy || text.trim().length < 20}
-              className="rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition hover:opacity-90 disabled:opacity-40"
+              className="rounded-md bg-[var(--raspberry)] px-4 py-2 text-sm font-bold text-[#FEFEFE] transition hover:opacity-90 disabled:opacity-40"
             >
               {pdfBusy ? "ㅡㅅㅡ PDF 읽는 중…" : pending ? "ㅡㅅㅡ 분석 중…" : "내 스택 시대 진단"}
             </button>
@@ -201,7 +202,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
 
       {/* AI 총평 */}
       {res?.comment && (
-        <Card className="border-l-4 border-l-[var(--chart-1)]">
+        <Card className="border-l-4 border-l-[var(--raspberry)]">
           <CardContent className="py-4">
             <p className="text-[15px] leading-relaxed">
               <span className="mr-1.5 select-none font-black" aria-hidden>ㅇㅅㅇ</span>
@@ -228,11 +229,11 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>내 스택의 시대 무게중심</CardDescription>
-              <CardTitle className="text-4xl">
-                <span className="mr-2 select-none font-black tracking-tight" aria-hidden>
+              <CardTitle className="text-4xl font-black tracking-[-0.04em]">
+                <span className="mr-2 select-none" aria-hidden>
                   {era.gapYears > 0.4 ? "ㅌㅅㅌ" : "^ㅅ^"}
                 </span>
-                ≈ {Math.round(era.centroidYear)}년
+                <span className="font-mono font-medium">≈ {Math.round(era.centroidYear)}년</span>
                 <span className="ml-2 text-xl text-muted-foreground">
                   {era.gapYears > 0.4
                     ? `최신 설문(${LATEST_YEAR})보다 ${era.gapYears}년 이전`

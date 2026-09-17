@@ -49,30 +49,31 @@
 }
 
 :root {
-  /* 간택스택 디자인 시스템 — 웜그레이 모노크롬 (docs/logo-design) */
-  --background: #f4f4f2;
-  --foreground: #111110;
-  --card: #fafaf8;
-  --card-foreground: #111110;
-  --popover: #fafaf8;
-  --popover-foreground: #111110;
-  --primary: #111110;
-  --primary-foreground: #fafaf8;
-  --secondary: #ededea;
-  --secondary-foreground: #111110;
-  --muted: #ededea;
-  --muted-foreground: #8a8a83;
-  --accent: #ededea;
-  --accent-foreground: #111110;
+  /* 간택스택 DS v2 (docs/logo-design) — Paper·차콜 3단·라즈베리 단일 액센트, 그림자 대신 선 */
+  --background: #F4F5F6;
+  --foreground: #28272A;
+  --card: #FEFEFE;
+  --card-foreground: #28272A;
+  --popover: #FEFEFE;
+  --popover-foreground: #28272A;
+  --primary: #28272A;
+  --primary-foreground: #FEFEFE;
+  --secondary: #EAEBED;
+  --secondary-foreground: #28272A;
+  --muted: #EAEBED;
+  --muted-foreground: #6E7075;
+  --accent: #EAEBED;
+  --accent-foreground: #28272A;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e2e2dd;
-  --input: #e2e2dd;
-  --ring: #8a8a83;
-  --chart-1: #111110;
-  --chart-2: #4a4a45;
-  --chart-3: #8a8a83;
-  --chart-4: #b8b8b2;
-  --chart-5: #e2e2dd;
+  --border: #E5E6E8;
+  --input: #E5E6E8;
+  --ring: #6E7075;
+  --raspberry: #F32859;
+  --chart-1: #28272A;
+  --chart-2: #313538;
+  --chart-3: #6E7075;
+  --chart-4: #B9BBBF;
+  --chart-5: #E5E6E8;
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -85,30 +86,31 @@
 }
 
 .dark {
-  /* 다크 = 팔레트 반전 (#111110 지면 위 #fafaf8) */
-  --background: #111110;
-  --foreground: #fafaf8;
-  --card: #1a1a19;
-  --card-foreground: #fafaf8;
-  --popover: #1a1a19;
-  --popover-foreground: #fafaf8;
-  --primary: #fafaf8;
-  --primary-foreground: #111110;
-  --secondary: #2a2a28;
-  --secondary-foreground: #fafaf8;
-  --muted: #2a2a28;
-  --muted-foreground: #8a8a83;
-  --accent: #2a2a28;
-  --accent-foreground: #fafaf8;
+  /* 다크 = 차콜 3단(#28272A → #313538 → #3A3B3F), 그림자 없이 단차로 깊이 */
+  --background: #28272A;
+  --foreground: #FEFEFE;
+  --card: #313538;
+  --card-foreground: #FEFEFE;
+  --popover: #313538;
+  --popover-foreground: #FEFEFE;
+  --primary: #FEFEFE;
+  --primary-foreground: #28272A;
+  --secondary: #3A3B3F;
+  --secondary-foreground: #FEFEFE;
+  --muted: #3A3B3F;
+  --muted-foreground: #A6A8AD;
+  --accent: #3A3B3F;
+  --accent-foreground: #FEFEFE;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #2e2e2c;
-  --input: #2e2e2c;
-  --ring: #8a8a83;
-  --chart-1: #fafaf8;
-  --chart-2: #b8b8b2;
-  --chart-3: #8a8a83;
-  --chart-4: #4a4a45;
-  --chart-5: #2e2e2c;
+  --border: #3A3B3F;
+  --input: #3A3B3F;
+  --ring: #6E7075;
+  --raspberry: #F32859;
+  --chart-1: #FEFEFE;
+  --chart-2: #B9BBBF;
+  --chart-3: #6E7075;
+  --chart-4: #3A3B3F;
+  --chart-5: #313538;
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);

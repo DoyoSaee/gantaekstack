@@ -1,14 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 간택스택 얼굴 심볼 (투명배경·헤더용) — (ㅌㅅㅌ) -->
-  <g fill="currentColor" color="#111110">
-    <rect x="64" y="130" width="26" height="132"/>
-    <rect x="64" y="130" width="136" height="26"/>
-    <rect x="64" y="183" width="136" height="26"/>
-    <rect x="64" y="236" width="136" height="26"/>
-    <rect x="312" y="130" width="26" height="132"/>
-    <rect x="312" y="130" width="136" height="26"/>
-    <rect x="312" y="183" width="136" height="26"/>
-    <rect x="312" y="236" width="136" height="26"/>
+  <!-- 간택스택 마크 — "ㄱ이 머리다" (풀버전: 획 12 + 수염 3가닥×양쪽, 차콜) -->
+  <g fill="currentColor" color="#28272A">
+    <!-- ㄱ -->
+    <rect x="96" y="124" width="320" height="15.2" rx="7.6"/>
+    <rect x="400.8" y="124" width="15.2" height="240" rx="7.6"/>
+    <!-- 왼쪽 눈 ㅌ -->
+    <rect x="128" y="180" width="76" height="13.6" rx="6.8"/>
+    <rect x="128" y="211.2" width="76" height="13.6" rx="6.8"/>
+    <rect x="128" y="242.4" width="76" height="13.6" rx="6.8"/>
+    <rect x="128" y="180" width="13.6" height="76" rx="6.8"/>
+    <!-- 오른쪽 눈 ㅌ -->
+    <rect x="264" y="180" width="76" height="13.6" rx="6.8"/>
+    <rect x="264" y="211.2" width="76" height="13.6" rx="6.8"/>
+    <rect x="264" y="242.4" width="76" height="13.6" rx="6.8"/>
+    <rect x="264" y="180" width="13.6" height="76" rx="6.8"/>
+    <!-- 입 ㅅ (±27°) -->
+    <rect x="226.4" y="284" width="15.2" height="72" rx="7.6" transform="rotate(-27 234 284)"/>
+    <rect x="226.4" y="284" width="15.2" height="72" rx="7.6" transform="rotate(27 234 284)"/>
+    <!-- 수염 3가닥×양쪽 (±22°/0°, 얼굴 쪽 고정점) -->
+    <rect x="24" y="232" width="64" height="11.2" rx="5.6" transform="rotate(22 88 237.6)"/>
+    <rect x="24" y="264" width="64" height="11.2" rx="5.6"/>
+    <rect x="24" y="296" width="64" height="11.2" rx="5.6" transform="rotate(-22 88 301.6)"/>
+    <rect x="424" y="232" width="64" height="11.2" rx="5.6" transform="rotate(-22 424 237.6)"/>
+    <rect x="424" y="264" width="64" height="11.2" rx="5.6"/>
+    <rect x="424" y="296" width="64" height="11.2" rx="5.6" transform="rotate(22 424 301.6)"/>
   </g>
-  <path d="M201 400 L256 318 L311 400" fill="none" stroke="currentColor" color="#111110" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
