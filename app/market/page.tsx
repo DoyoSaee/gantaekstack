@@ -54,20 +54,29 @@ export default async function Market({
     CATEGORIES.find((c) => (c.key || undefined) === category)?.label ?? "전체 개발기술";
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
+    <main className="mx-auto max-w-5xl px-4 py-16">
+      {/* AppShell: 마크 · 이름 · 현재 위치 */}
+      <div className="mb-10 flex items-center gap-2.5 text-sm">
+        <Link href="/" className="flex items-center gap-2.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="간택스택 마크" className="h-7 w-7 dark:invert" />
+          <span className="font-black tracking-[-0.02em]">간택스택</span>
+        </Link>
+        <span className="text-muted-foreground">·</span>
+        <span className="font-medium" aria-current="page">시장 대시보드</span>
+        <Link href="/" className="ml-auto text-[13px] text-muted-foreground hover:text-foreground">
+          ← 이력서 시대 진단
+        </Link>
+      </div>
       <header className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">시장 대시보드</h1>
-            <p className="mt-1 text-muted-foreground">
-              채용시장이 <span className="font-medium text-foreground">간택</span>하는 기술 —
-              지금 뜨는 스택을 데이터로.
-            </p>
-          </div>
-          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-            ← 이력서 시대 진단
-          </Link>
-        </div>
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          Market
+        </p>
+        <h1 className="mt-2 text-3xl font-black tracking-[-0.04em]">시장 대시보드</h1>
+        <p className="mt-2 text-muted-foreground">
+          채용시장이 <span className="font-medium text-foreground">간택</span>하는 기술 —
+          지금 뜨는 스택을 데이터로.
+        </p>
       </header>
 
       {/* 지역 탭 */}
@@ -110,20 +119,26 @@ export default async function Market({
       <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
         <Card>
           <CardHeader className="pb-2">
-            <CardDescription>분석한 개발공고</CardDescription>
-            <CardTitle className="text-3xl">{meta.postings.toLocaleString()}</CardTitle>
+            <CardDescription className="text-[13px]">분석한 개발공고</CardDescription>
+            <CardTitle className="font-mono text-3xl font-medium">
+              {meta.postings.toLocaleString()}
+              <span className="ml-1 text-base text-muted-foreground">건</span>
+            </CardTitle>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardDescription>추출된 기술</CardDescription>
-            <CardTitle className="text-3xl">{meta.skills.toLocaleString()}</CardTitle>
+            <CardDescription className="text-[13px]">추출된 기술</CardDescription>
+            <CardTitle className="font-mono text-3xl font-medium">
+              {meta.skills.toLocaleString()}
+              <span className="ml-1 text-base text-muted-foreground">종</span>
+            </CardTitle>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardDescription>{catLabel} 1위</CardDescription>
-            <CardTitle className="text-3xl">{skills[0]?.name ?? "-"}</CardTitle>
+            <CardDescription className="text-[13px]">{catLabel} 1위</CardDescription>
+            <CardTitle className="font-mono text-2xl font-medium">{skills[0]?.name ?? "-"}</CardTitle>
           </CardHeader>
         </Card>
       </div>
@@ -131,6 +146,9 @@ export default async function Market({
       {/* TOP 기술 */}
       <Card>
         <CardHeader>
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+            Ranking
+          </p>
           <CardTitle>{catLabel} — 요구 기술 TOP 20</CardTitle>
           <CardDescription>
             공고 본문에서 AI가 추출·정규화·분류한 기술을 세어 정렬
@@ -146,12 +164,12 @@ export default async function Market({
                 {skills.map((s, i) => (
                   <div key={s.name} className="flex items-center justify-between py-2">
                     <div className="flex items-center gap-3">
-                      <span className="w-6 text-right text-sm text-muted-foreground">{i + 1}</span>
-                      <span className="font-medium">{s.name}</span>
+                      <span className="w-6 text-right font-mono text-sm text-muted-foreground">{i + 1}</span>
+                      <span className="font-mono text-sm font-medium">{s.name}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Badge variant="secondary">{s.count}건</Badge>
-                      <span className="w-14 text-right text-sm text-muted-foreground">{s.share}%</span>
+                      <span className="font-mono text-xs text-muted-foreground">{s.count}건</span>
+                      <span className="w-14 text-right font-mono text-sm">{s.share}%</span>
                     </div>
                   </div>
                 ))}
@@ -165,6 +183,9 @@ export default async function Market({
       {hidden.length > 0 && (
         <Card className="mt-6">
           <CardHeader>
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              Hidden
+            </p>
             <CardTitle>AI가 포착한 &ldquo;숨은 요구&rdquo;</CardTitle>
             <CardDescription>
               표면 키워드가 아니라, 공고 문장 속에 숨은 실제 요구 역량 — 이게 단순 통계와의 차이

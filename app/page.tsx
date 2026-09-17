@@ -19,7 +19,7 @@ export default async function Home({
   const meta = await counts();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
+    <main className="mx-auto max-w-3xl px-4 py-16">
       <header className="relative mb-8">
         {/* 워터마크 마크 — 그림자 대신 마크로 지면에 결 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -37,7 +37,10 @@ export default async function Home({
             BETA
           </span>
         </div>
-        <h1 className="mt-3 text-4xl font-black leading-[1.15] tracking-[-0.04em]">
+        <p className="mt-6 font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          Market-Picked Stack
+        </p>
+        <h1 className="mt-2 text-[40px] font-black leading-[46px] tracking-[-0.04em]">
           내 이력서, <span className="underline decoration-foreground decoration-4 underline-offset-4">몇 년도</span> 스택일까
         </h1>
         <p className="mt-3 text-muted-foreground">

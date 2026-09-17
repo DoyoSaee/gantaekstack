@@ -146,7 +146,13 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
               disabled={busy || text.trim().length < 20}
               className="rounded-md bg-[var(--raspberry)] px-4 py-2 text-base font-bold text-[#FEFEFE] transition hover:opacity-90 disabled:opacity-40"
             >
-              {pdfBusy ? "ㅡㅅㅡ PDF 읽는 중…" : pending ? "ㅡㅅㅡ 분석 중…" : "내 스택 시대 진단"}
+              {busy ? (
+                <>
+                  <span aria-hidden>ㅡㅅㅡ</span> {pdfBusy ? "PDF 읽는 중…" : "분석 중…"}
+                </>
+              ) : (
+                "내 스택 시대 진단"
+              )}
             </button>
             <button
               onClick={() => fileRef.current?.click()}
@@ -235,18 +241,23 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           {/* 무게중심 */}
           <Card>
             <CardHeader className="pb-2">
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                Era
+              </p>
               <CardDescription>내 스택의 시대 무게중심</CardDescription>
-              <CardTitle className="text-4xl font-black tracking-[-0.04em]">
+              <CardTitle className="text-5xl font-black tracking-[-0.04em]">
                 <span className="mr-2 select-none" aria-hidden>
                   {era.gapYears > 0.4 ? "ㅌㅅㅌ" : "^ㅅ^"}
                 </span>
-                <span className="font-mono font-medium">≈ {Math.round(era.centroidYear)}년</span>
-                <span className="ml-2 text-xl text-muted-foreground">
-                  {era.gapYears > 0.4
-                    ? `최신 설문(${LATEST_YEAR})보다 ${era.gapYears}년 이전`
-                    : "최신 설문 시점과 근접"}
+                <span className="font-mono font-medium tracking-[-0.02em]">
+                  ≈ {Math.round(era.centroidYear)}년
                 </span>
               </CardTitle>
+              <p className="mt-1 text-base text-muted-foreground">
+                {era.gapYears > 0.4
+                  ? `최신 설문(${LATEST_YEAR})보다 ${era.gapYears}년 이전`
+                  : "최신 설문 시점과 근접"}
+              </p>
             </CardHeader>
             <CardContent className="space-y-3">
               {era.byCategory.length > 1 && (
@@ -277,6 +288,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           {/* 시대 곡선 */}
           <Card>
             <CardHeader>
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                Curve
+              </p>
               <CardTitle className="text-base">내 스택의 주류도 곡선</CardTitle>
               <CardDescription>봉우리가 왼쪽일수록 과거 스택, 오른쪽일수록 현재 스택</CardDescription>
             </CardHeader>
@@ -326,6 +340,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           {/* 기술별 시대 진단 */}
           <Card>
             <CardHeader>
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                By Tech
+              </p>
               <CardTitle className="text-base">기술별 시대 진단</CardTitle>
               <CardDescription>
                 각 기술의 정점 연도와 현재 사용률 — &ldquo;감소&rdquo;는 신규 채택 비중이 줄었다는 뜻이지,
@@ -344,9 +361,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                       </div>
                       <div className="flex shrink-0 items-center gap-3 text-muted-foreground">
                         {m.trend !== "modern" && (
-                          <span className="text-xs">현재 사용률 {Math.round(m.latest)}%</span>
+                          <span className="font-mono text-xs">현재 {Math.round(m.latest)}%</span>
                         )}
-                        <span className="text-xs">
+                        <span className="font-mono text-xs">
                           {m.trend === "modern" ? `등장 ${m.peakYear}년~` : `정점 ${m.peakYear}년`}
                         </span>
                         {m.trend === "declining" && m.successor && (
@@ -371,6 +388,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           {res.gap && (
             <Card>
               <CardHeader>
+                <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  Next
+                </p>
                 <CardTitle className="text-base">지금 시장에 맞추려면</CardTitle>
                 <CardDescription>
                   2026년 지금 수집한 채용공고 AI 분석 기준(주로 글로벌 · 한국 소스 승인 대기) — 내 이력서에 없는 것부터
@@ -382,8 +402,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                     <p className="mb-2 text-sm font-medium">내 스택과 같은 공고에서 함께 요구된 기술</p>
                     <div className="flex flex-wrap gap-2">
                       {res.together.map((s) => (
-                        <Badge key={s.name} variant="secondary">
-                          {s.name} <span className="ml-1 text-muted-foreground">{s.count}회 동반</span>
+                        <Badge key={s.name} variant="secondary" className="font-mono">
+                          {s.name}{" "}
+                          <span className="ml-1 text-[#4A4B4F] dark:text-[#B9BBBF]">{s.count}회 동반</span>
                         </Badge>
                       ))}
                     </div>
@@ -395,12 +416,15 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                 <div>
                   <p className="mb-2 text-sm font-medium">시장 전체 수요 대비 부족한 기술</p>
                   {res.gap.missing.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">상위 수요를 이미 다 갖췄어. 👏</p>
+                    <p className="text-sm text-muted-foreground">
+                      상위 수요를 이미 다 갖췄어. <span aria-hidden>^ㅅ^</span>
+                    </p>
                   ) : (
                     <div className="flex flex-wrap gap-2">
                       {res.gap.missing.slice(0, 10).map((s) => (
-                        <Badge key={s.name} variant="secondary">
-                          {s.name} <span className="ml-1 text-muted-foreground">{s.share}%</span>
+                        <Badge key={s.name} variant="secondary" className="font-mono">
+                          {s.name}{" "}
+                          <span className="ml-1 text-[#4A4B4F] dark:text-[#B9BBBF]">{s.share}%</span>
                         </Badge>
                       ))}
                     </div>
