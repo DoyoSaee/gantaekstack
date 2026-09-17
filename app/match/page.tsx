@@ -1,5 +1,4 @@
 import { PostingMatcher } from "@/components/posting-matcher";
-import { AppNav } from "@/components/app-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -16,8 +15,7 @@ export default async function MatchPage({
     .slice(0, 40);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16">
-      <AppNav current="/match" />
+    <main className="mx-auto max-w-3xl px-4 pb-16 pt-10">
       <header className="mb-8">
         <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Match

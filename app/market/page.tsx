@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SkillChart } from "@/components/skill-chart";
-import { AppNav } from "@/components/app-nav";
 
 const REGIONS = [
   { key: "", label: "전체" },
@@ -57,8 +56,7 @@ export default async function Market({
     CATEGORIES.find((c) => (c.key || undefined) === category)?.label ?? "전체 개발기술";
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-16">
-      <AppNav current="/market" />
+    <main className="mx-auto max-w-5xl px-4 pb-16 pt-10">
       <header className="mb-8">
         <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Market

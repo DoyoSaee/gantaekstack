@@ -2,7 +2,6 @@ import Link from "next/link";
 import { counts } from "@/lib/aggregate";
 import { ERA_YEARS } from "@/lib/era-data";
 import { ResumeAnalyzer } from "@/components/resume-analyzer";
-import { AppNav } from "@/components/app-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -20,8 +19,7 @@ export default async function Home({
   const meta = await counts();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16">
-      <AppNav current="/" />
+    <main className="mx-auto max-w-3xl px-4 pb-16 pt-10">
       <header className="relative mb-8">
         {/* 워터마크 마크 — 그림자 대신 마크로 지면에 결 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}

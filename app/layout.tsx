@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Gothic_A1, JetBrains_Mono } from "next/font/google";
+import { AppNav } from "@/components/app-nav";
 import "./globals.css";
 
 // 디자인 시스템(docs/logo-design): Gothic A1(400/500/700/900) + JetBrains Mono
@@ -26,7 +27,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ko"
       className={`${gothicA1.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AppNav />
+        {children}
+      </body>
     </html>
   );
 }
