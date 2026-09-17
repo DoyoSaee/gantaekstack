@@ -1,27 +1,38 @@
-# 홈랩 k3s 배포 런북 (FifthWing/mall 패턴)
+# 홈랩 k3s 배포 런북 (FifthWing/mall 패턴 + CI/CD)
 
 도메인: `gantaek.doyosae.com` · 포트 3007 / NodePort 30071 · 이미지 `ghcr.io/doyosaee/gantaek`
 
-## 1. 로컬 — 이미지 빌드 & 푸시 (Mac은 amd64 크로스빌드 필수)
+## 0. GitHub 리포 (한 번만, Mac)
+
+1. github.com/new → `gantaekstack` (private 권장) 생성
+2. ```bash
+   cd ~/Dev/gantaekstack
+   git remote add origin git@github.com:doyosaee/gantaekstack.git
+   git push -u origin main
+   ```
+3. 이후 **main에 push하면 Actions가 자동으로 amd64 이미지 빌드→ghcr 푸시** (.github/workflows/deploy.yml)
+   배포 반영은 서버에서: `kubectl rollout restart deploy/gantaek`
+
+## 1. 첫 배포 — 서버에서 네이티브 빌드 (Actions 기다릴 필요 없이 바로)
 
 ```bash
-cd ~/Dev/gantaekstack
-docker buildx build --platform linux/amd64 -t ghcr.io/doyosaee/gantaek:latest --push .
+git clone git@github.com:doyosaee/gantaekstack.git && cd gantaekstack
+docker build -t ghcr.io/doyosaee/gantaek:latest .     # 서버가 amd64라 --platform 불필요
+docker push ghcr.io/doyosaee/gantaek:latest            # ghcr 로그인 필요시: echo <PAT> | docker login ghcr.io -u doyosaee --password-stdin
 ```
 
-(ghcr 로그인 안 돼 있으면: `echo <GH_PAT> | docker login ghcr.io -u doyosaee --password-stdin`)
-
-## 2. 서버 — DB 생성 + 로컬 데이터 이관 (mall 때와 동일 패턴)
+## 2. DB 생성 + 데이터 이관 (스키마 포함 — 별도 migrate 불필요)
 
 ```bash
-# 로컬 Mac에서 한 방에 (스키마+데이터 전부 — 별도 migrate 불필요)
+# 서버: DB 생성
+kubectl exec -it <postgres-pod> -- psql -U postgres -c 'CREATE DATABASE gantaek;'
+
+# Mac에서: 로컬 1,830건+스키마 통째로 이관
 docker exec gantaek-pg pg_dump -U postgres -d gantaekstack --no-owner --no-privileges \
   | ssh <서버> "kubectl exec -i <postgres-pod> -- psql -U postgres -d gantaek"
 ```
 
-먼저 서버에서 DB 생성: `kubectl exec -it <postgres-pod> -- psql -U postgres -c 'CREATE DATABASE gantaek;'`
-
-## 3. 서버 — 시크릿 + 매니페스트
+## 3. 시크릿 + 매니페스트 (서버)
 
 ```bash
 kubectl create secret generic gantaek-secrets \
@@ -36,17 +47,31 @@ kubectl apply -f k8s/deployment.yaml -f k8s/ingress.yaml -f k8s/cronjob.yaml
 
 ## 4. DNS
 
-Cloudflare에 `gantaek.doyosae.com` A레코드 (mall/dungji와 동일 IP·설정).
+Cloudflare `gantaek.doyosae.com` A레코드 (mall/dungji와 동일 IP).
 
 ## 5. 확인
 
-- https://gantaek.doyosae.com — 홈 로드 + 진단 1회
-- `/market` — 스탯이 로컬과 같은 수치인지 (= DB 이관 성공)
-- cron 수동 검증: `kubectl create job --from=cronjob/gantaek-collect gantaek-collect-test`
+- https://gantaek.doyosae.com 홈 + 진단 1회 + /match + /market 수치가 로컬과 동일한지(=이관 성공)
+- cron 수동: `kubectl create job --from=cronjob/gantaek-collect gantaek-collect-test && kubectl logs job/gantaek-collect-test -f`
 
-## 함정 노트 (mall 6종 중 여기 해당분)
+## 이후 업데이트 루틴 (CI/CD)
 
-- Mac→서버는 `--platform linux/amd64` 없으면 exec format error
-- 빌드 시 DATABASE_URL은 자리표시자로 충분 (전 페이지 force-dynamic, Dockerfile에 이미 넣음)
-- prisma migrate 없음 — pg_dump가 스키마까지 옮기므로 initContainer 불필요. 이후 스키마 변경 시 `prisma db push`를 로컬→서버 DB 터널로
-- NodePort 30071 — 기존 서비스와 충돌 시 이 파일만 수정
+```bash
+# Mac: 코드 수정 → git push        (Actions가 이미지 자동 빌드·푸시, ~3분)
+# 서버: kubectl rollout restart deploy/gantaek
+```
+
+## 스키마 마이그레이션 (이후 변경 시)
+
+베이스라인 `prisma/migrations/0_init` 커밋돼 있음. 스키마 바뀌면:
+```bash
+# Mac(로컬 DB): pnpm exec prisma migrate dev --name <변경명>  → 커밋
+# 서버 DB 반영(터널 뚫고): DATABASE_URL=<서버DSN> pnpm exec prisma migrate deploy
+# 서버 DB엔 첫 1회만: DATABASE_URL=<서버DSN> pnpm exec prisma migrate resolve --applied 0_init
+```
+
+## 함정 노트
+
+- k3s는 containerd라 서버 docker 로컬 이미지 직접 인식 X → ghcr push 경유(위 흐름 그대로)
+- 빌드 시 DATABASE_URL 자리표시자 OK (전 페이지 force-dynamic, Dockerfile에 내장)
+- NodePort 30071 충돌 시 k8s/deployment.yaml만 수정
