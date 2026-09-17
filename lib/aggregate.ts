@@ -60,7 +60,16 @@ export async function coOccurring(skillName: string, region?: string, limit = 10
 export async function counts(region?: string) {
   const [postings, skills] = await Promise.all([
     prisma.jobPosting.count({ where: region ? { region } : undefined }),
-    prisma.skill.count(),
+    // 지역 지정 시: 그 지역 공고에 실제로 등장한 기술만 센다 (전체 사전 크기 X)
+    region
+      ? prisma.postingSkill
+          .findMany({
+            where: { posting: { region } },
+            distinct: ["skillId"],
+            select: { skillId: true },
+          })
+          .then((r) => r.length)
+      : prisma.skill.count(),
   ]);
   return { postings, skills };
 }
