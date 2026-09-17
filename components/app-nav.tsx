@@ -15,22 +15,27 @@ export function AppNav({ current }: { current: "/" | "/market" | "/gap" }) {
         <img src="/logo.svg" alt="간택스택 마크" className="h-7 w-7 dark:invert" />
         <span className="font-black tracking-[-0.02em]">간택스택</span>
       </Link>
-      <span className="hidden text-border sm:inline">|</span>
-      {MENUS.map((m) =>
-        m.href === current ? (
-          <span key={m.href} className="font-medium text-foreground" aria-current="page">
-            {m.label}
-          </span>
-        ) : (
-          <Link
-            key={m.href}
-            href={m.href}
-            className="text-muted-foreground transition hover:text-foreground"
-          >
-            {m.label}
-          </Link>
-        ),
-      )}
+      <div className="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="페이지">
+        {MENUS.map((m) =>
+          m.href === current ? (
+            <span
+              key={m.href}
+              className="rounded-full bg-foreground px-3.5 py-1.5 text-[13px] font-medium text-background"
+              aria-current="page"
+            >
+              {m.label}
+            </span>
+          ) : (
+            <Link
+              key={m.href}
+              href={m.href}
+              className="rounded-full border border-transparent px-3.5 py-1.5 text-[13px] text-muted-foreground transition hover:border-border hover:text-foreground"
+            >
+              {m.label}
+            </Link>
+          ),
+        )}
+      </div>
     </nav>
   );
 }

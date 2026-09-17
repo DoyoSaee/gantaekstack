@@ -64,6 +64,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
   const [pdfBusy, setPdfBusy] = useState(false);
   const [copied, setCopied] = useState(false);
   const [inputOpen, setInputOpen] = useState(true); // 결과가 나오면 입력창은 접힘
+  const [methodOpen, setMethodOpen] = useState(false); // 계산 방식 설명 펼침
   const fileRef = useRef<HTMLInputElement>(null);
   const bootedRef = useRef(false);
 
@@ -409,15 +410,54 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           {/* 시대 곡선 — 모양을 먼저, 답은 그다음 */}
           <Card>
             <CardHeader>
-              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                Curve
-              </p>
-              <CardTitle className="text-base">내 스택의 주류도 곡선</CardTitle>
-              <CardDescription>봉우리가 왼쪽일수록 과거 스택, 오른쪽일수록 현재 스택</CardDescription>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                    Curve
+                  </p>
+                  <CardTitle className="text-base">내 스택의 주류도 곡선</CardTitle>
+                  <CardDescription>봉우리가 왼쪽일수록 과거 스택, 오른쪽일수록 현재 스택</CardDescription>
+                </div>
+                <button
+                  onClick={() => setMethodOpen((v) => !v)}
+                  className="shrink-0 rounded-md border px-3 py-1.5 text-[13px] text-muted-foreground transition hover:border-foreground hover:text-foreground"
+                >
+                  계산 방식 {methodOpen ? "↑" : "↓"}
+                </button>
+              </div>
             </CardHeader>
             <CardContent>
-              <ChartContainer config={chartConfig} className="h-[220px] w-full">
-                <LineChart data={era.yearScores} margin={{ left: 4, right: 8, top: 8 }}>
+              {methodOpen && (
+                <div className="mb-4 space-y-2 rounded-lg bg-muted p-4 text-sm leading-relaxed">
+                  <p>
+                    <span className="font-bold">데이터.</span> Stack Overflow 개발자 설문
+                    2017~2025의 기술별 사용률(%)을 시대 곡선으로 씀. 2020은 미조사, 2026은 결과
+                    미공개(공개 시 반영). 설문에 없는 신생 기술(Zustand·TanStack 등)은 공개 릴리스
+                    연도를 근거로 &ldquo;최신 신호&rdquo;로 반영.
+                  </p>
+                  <p>
+                    <span className="font-bold">주류도(세로축).</span> 내 기술 각각의 곡선을 자기
+                    최대값으로 정규화(0~1)해 연도별로 합산 — &ldquo;내 스택이 그 해에 얼마나
+                    주류였나&rdquo;의 상대값이라 절대 단위는 없음.
+                  </p>
+                  <p>
+                    <span className="font-bold">무게중심.</span> 기술마다 사용률이 정점이던 해를
+                    구하고, 시대 판별력이 큰 기술(변동폭 큰 곡선)에 가중치를 줘 평균. 늘 1위인
+                    기술(JavaScript 등)은 시대 신호가 약해서 낮게 반영됨.
+                  </p>
+                  <p>
+                    <span className="font-bold">격차.</span> 최신 설문 연도({LATEST_YEAR}) −
+                    무게중심. &ldquo;시장 요구 시대&rdquo;는 수집한 채용공고 각각에 같은 계산을
+                    적용해 평균낸 값.
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    판단이 아니라 통계 — 같은 입력이면 항상 같은 결과가 나오는 결정론적 계산이고,
+                    AI는 이력서·공고에서 기술을 읽어내는 데만 쓰여.
+                  </p>
+                </div>
+              )}
+              <ChartContainer config={chartConfig} className="h-[240px] w-full">
+                <LineChart data={era.yearScores} margin={{ left: 8, right: 24, top: 30 }}>
                   <CartesianGrid vertical={false} />
                   <XAxis dataKey="year" tickLine={false} axisLine={false} />
                   <YAxis hide />
@@ -535,7 +575,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                 {era.matched.map((m) => {
                   const t = TREND_LABEL[m.trend];
                   return (
-                    <div key={m.name} className="flex items-center justify-between gap-3 py-2">
+                    <div key={m.name} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 py-2">
                       <div className="flex min-w-0 items-center gap-2">
                         <span className="font-medium">{m.name}</span>
                         <span className={`text-xs ${t.cls}`}>{t.text}</span>

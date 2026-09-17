@@ -152,7 +152,7 @@ export default async function Market({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {era.buckets.map((b) => {
                 const pct = era.count ? Math.round((b.n / era.count) * 100) : 0;
                 return (
