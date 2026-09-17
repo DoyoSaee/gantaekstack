@@ -70,7 +70,13 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
 
   function applyResult(r: AnalyzeResult) {
     setRes(r);
-    if (r.skills.length > 0) setInputOpen(false);
+    if (r.skills.length > 0) {
+      setInputOpen(false);
+      // 최근 진단 스택 저장 → /match·/gap이 자동으로 이어받음 (서버 저장 없음)
+      try {
+        localStorage.setItem("gantaek:lastSkills", r.skills.join(","));
+      } catch {}
+    }
   }
 
   // 공유 링크(?s=...)로 진입 시 자동 분석 (Gemini 추출 생략, 스킬로 바로)

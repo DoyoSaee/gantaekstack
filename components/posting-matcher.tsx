@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   Card,
   CardContent,
@@ -16,9 +16,23 @@ import { matchPosting, type MatchResult } from "@/app/match/actions";
 export function PostingMatcher({ initialSkills = [] }: { initialSkills?: string[] }) {
   const [posting, setPosting] = useState("");
   const [mySkills, setMySkills] = useState(initialSkills.join(", "));
+  const [fromLast, setFromLast] = useState(false);
   const [contribute, setContribute] = useState(true);
   const [res, setRes] = useState<MatchResult | null>(null);
   const [pending, start] = useTransition();
+
+  // URL로 안 넘어왔으면 최근 진단 스택을 이어받는다 (탭 이동으로 와도 연결)
+  useEffect(() => {
+    if (initialSkills.length > 0) return;
+    try {
+      const last = localStorage.getItem("gantaek:lastSkills");
+      if (last) {
+        setMySkills(last.split(",").join(", "));
+        setFromLast(true);
+      }
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function run() {
     const skills = mySkills.split(",").map((s) => s.trim()).filter(Boolean);
@@ -51,7 +65,9 @@ export function PostingMatcher({ initialSkills = [] }: { initialSkills?: string[
               className="h-10 w-full rounded-md border bg-transparent px-3 font-mono text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
             />
             <p className="mt-1 text-xs text-muted-foreground">
-              이력서 진단을 먼저 하고 오면 자동으로 채워져
+              {fromLast
+                ? "최근 이력서 진단에서 이어받았어 ✓ (수정 가능)"
+                : "이력서 진단을 먼저 하고 오면 자동으로 채워져"}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
