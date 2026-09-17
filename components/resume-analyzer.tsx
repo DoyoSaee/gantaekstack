@@ -138,7 +138,7 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
               disabled={busy || text.trim().length < 20}
               className="rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition hover:opacity-90 disabled:opacity-40"
             >
-              {pdfBusy ? "PDF 읽는 중…" : pending ? "분석 중…" : "내 스택 시대 진단"}
+              {pdfBusy ? "ㅡㅅㅡ PDF 읽는 중…" : pending ? "ㅡㅅㅡ 분석 중…" : "내 스택 시대 진단"}
             </button>
             <button
               onClick={() => fileRef.current?.click()}
@@ -203,7 +203,10 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
       {res?.comment && (
         <Card className="border-l-4 border-l-[var(--chart-1)]">
           <CardContent className="py-4">
-            <p className="text-[15px] leading-relaxed">{res.comment}</p>
+            <p className="text-[15px] leading-relaxed">
+              <span className="mr-1.5 select-none font-black" aria-hidden>ㅇㅅㅇ</span>
+              {res.comment}
+            </p>
             <p className="mt-2 text-xs text-muted-foreground">AI 총평 — 판단이 아니라 방향이야</p>
           </CardContent>
         </Card>
@@ -226,6 +229,9 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
             <CardHeader className="pb-2">
               <CardDescription>내 스택의 시대 무게중심</CardDescription>
               <CardTitle className="text-4xl">
+                <span className="mr-2 select-none font-black tracking-tight" aria-hidden>
+                  {era.gapYears > 0.4 ? "ㅌㅅㅌ" : "^ㅅ^"}
+                </span>
                 ≈ {Math.round(era.centroidYear)}년
                 <span className="ml-2 text-xl text-muted-foreground">
                   {era.gapYears > 0.4
