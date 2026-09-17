@@ -41,7 +41,7 @@ export default async function Gap({
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 pb-16 pt-10">
+    <main className="mx-auto max-w-5xl px-4 pb-16 pt-10">
       <header className="mb-6">
         <h1 className="text-3xl font-black tracking-[-0.04em]">내 스택 격차</h1>
         <p className="mt-1 text-muted-foreground">

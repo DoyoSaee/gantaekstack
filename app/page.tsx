@@ -19,7 +19,7 @@ export default async function Home({
   const meta = await counts();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 pb-16 pt-10">
+    <main className="mx-auto max-w-5xl px-4 pb-16 pt-10">
       <header className="relative mb-8">
         {/* 워터마크 마크 — 그림자 대신 마크로 지면에 결 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -35,7 +35,7 @@ export default async function Home({
         <h1 className="mt-2 text-[40px] font-black leading-[46px] tracking-[-0.04em]">
           내 이력서, <span className="underline decoration-foreground decoration-4 underline-offset-4">몇 년도</span> 스택일까
         </h1>
-        <p className="mt-3 text-muted-foreground">
+        <p className="mt-3 max-w-[620px] text-muted-foreground">
           이력서를 넣으면 — AI가 스택을 읽고, 기술마다{" "}
           <span className="font-medium text-foreground">시장에서 정점이던 해</span>와{" "}
           <span className="font-medium text-foreground">시장이 어디로 이동했는지</span>, 그리고 지금

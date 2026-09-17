@@ -15,13 +15,13 @@ export default async function MatchPage({
     .slice(0, 40);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 pb-16 pt-10">
+    <main className="mx-auto max-w-5xl px-4 pb-16 pt-10">
       <header className="mb-8">
         <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Match
         </p>
         <h1 className="mt-2 text-3xl font-black tracking-[-0.04em]">이 공고, 나랑 맞나</h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="mt-2 max-w-[620px] text-muted-foreground">
           지원 직전의 공고를 붙여넣으면 — 요구 스택과 내 스택의 대조, 공고가 요구하는{" "}
           <span className="font-medium text-foreground">스택의 시대</span>, 문장 속 숨은 요구까지.
           기여를 켜면 그 공고가 한국 데이터셋을 키워.
