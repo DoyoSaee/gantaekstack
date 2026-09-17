@@ -1,5 +1,6 @@
 import { prisma } from "./db";
 import { normalizeSkill } from "./skills";
+import { analyzeEra } from "./era";
 
 // 집계는 전부 코드(결정론). AI는 '구조화'에만, 통계는 세는 것.
 // region 지정 시 해당 지역(kr|global)만, 없으면 전체.
@@ -80,6 +81,33 @@ export async function skillGap(userSkillsRaw: string[], region?: string) {
   const matchRate = top20.length ? Math.round((inTop20 / top20.length) * 100) : 0;
 
   return { have, missing, niche, matchRate, inTop20, top20n: top20.length };
+}
+
+// 시장의 시대: 공고마다 '요구 스택의 무게중심 연도'를 계산해 집계.
+// "2026년 공고 = 2026 스택"이 아니라, 공고가 실제로 요구하는 기술의 시대를 잰다.
+export async function marketEra(region?: string) {
+  const postings = await prisma.jobPosting.findMany({
+    where: region ? { region } : {},
+    select: { skills: { select: { skill: { select: { name: true } } } } },
+  });
+  const years: number[] = [];
+  for (const p of postings) {
+    const names = p.skills.map((s) => s.skill.name);
+    if (names.length < 3) continue; // 스킬이 너무 적으면 시대 판정 노이즈
+    const era = analyzeEra(names);
+    if (!era || era.matched.length < 3) continue;
+    years.push(era.centroidYear);
+  }
+  if (years.length === 0) return null;
+  const avg = years.reduce((a, b) => a + b, 0) / years.length;
+  const bucket = (lo: number, hi: number) => years.filter((y) => y >= lo && y < hi).length;
+  const buckets = [
+    { label: "~2019", n: bucket(-Infinity, 2019.5) },
+    { label: "2020–22", n: bucket(2019.5, 2022.5) },
+    { label: "2023–24", n: bucket(2022.5, 2024.5) },
+    { label: "2025~", n: bucket(2024.5, Infinity) },
+  ];
+  return { avg: Math.round(avg * 10) / 10, count: years.length, buckets };
 }
 
 // 차별점: 공고 문장 속 '숨은 요구'를 모아 빈도순으로. (표면 키워드가 아님)

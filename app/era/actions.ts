@@ -2,7 +2,7 @@
 
 import { extractResumeSkills, summarizeDiagnosis } from "@/lib/extract";
 import { analyzeEra, EraResult } from "@/lib/era";
-import { skillGap, coOccurring } from "@/lib/aggregate";
+import { skillGap, coOccurring, marketEra } from "@/lib/aggregate";
 import { normalizeSkill, isStopSkill } from "@/lib/skills";
 
 export type AnalyzeResult = {
@@ -11,16 +11,24 @@ export type AnalyzeResult = {
   gap: Awaited<ReturnType<typeof skillGap>> | null;
   together: { name: string; count: number }[]; // 내 스택과 같은 공고에서 함께 요구된 기술
   comment: string | null; // AI 총평 (없어도 동작)
+  marketEraAvg: number | null; // 시장이 요구하는 스택의 무게중심 (비교용)
   error?: string;
 };
 
-const EMPTY: AnalyzeResult = { skills: [], era: null, gap: null, together: [], comment: null };
+const EMPTY: AnalyzeResult = {
+  skills: [],
+  era: null,
+  gap: null,
+  together: [],
+  comment: null,
+  marketEraAvg: null,
+};
 
 // 공용 진단: 스킬 배열 → 시대 + 시장 갭 + 동반수요 + AI 총평
 async function diagnose(skills: string[], region?: string): Promise<AnalyzeResult> {
   const era = analyzeEra(skills);
   const reg = region === "kr" || region === "global" ? region : undefined;
-  const gap = await skillGap(skills, reg);
+  const [gap, mkt] = await Promise.all([skillGap(skills, reg), marketEra(reg)]);
 
   // 개인화 추천: 내 스킬들과 '같은 공고'에 등장한 기술을 합산 → 내가 없는 것만.
   const mine = new Set(skills);
@@ -54,7 +62,7 @@ async function diagnose(skills: string[], region?: string): Promise<AnalyzeResul
     console.error("[comment] 총평 생성 실패(무시):", e);
   }
 
-  return { skills, era, gap, together, comment };
+  return { skills, era, gap, together, comment, marketEraAvg: mkt?.avg ?? null };
 }
 
 // 이력서 텍스트 → 스킬 추출 → 진단.

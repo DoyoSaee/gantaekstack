@@ -78,7 +78,15 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
           setText(r.text);
           start(async () => setRes(await analyzeResume(r.text!)));
         } else {
-          setRes({ skills: [], era: null, gap: null, together: [], comment: null, error: r.error });
+          setRes({
+            skills: [],
+            era: null,
+            gap: null,
+            together: [],
+            comment: null,
+            marketEraAvg: null,
+            error: r.error,
+          });
         }
       } finally {
         setPdfBusy(false);
@@ -257,6 +265,19 @@ export function ResumeAnalyzer({ initialSkills = [] }: { initialSkills?: string[
                 {era.gapYears > 0.4
                   ? `최신 설문(${LATEST_YEAR})보다 ${era.gapYears}년 이전`
                   : "최신 설문 시점과 근접"}
+                {res.marketEraAvg != null && (
+                  <>
+                    {" · "}시장이 요구하는 스택 <span className="font-mono">≈ {res.marketEraAvg}년</span>
+                    {Math.abs(res.marketEraAvg - era.centroidYear) >= 0.5 && (
+                      <>
+                        {" — 실질 격차 "}
+                        <span className="font-mono text-foreground">
+                          {Math.abs(Math.round((res.marketEraAvg - era.centroidYear) * 10) / 10)}년
+                        </span>
+                      </>
+                    )}
+                  </>
+                )}
               </p>
             </CardHeader>
             <CardContent className="space-y-3">

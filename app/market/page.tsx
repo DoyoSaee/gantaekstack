@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { topSkills, counts, topHiddenRequirements } from "@/lib/aggregate";
+import { topSkills, counts, topHiddenRequirements, marketEra } from "@/lib/aggregate";
+import { LATEST_YEAR } from "@/lib/era-data";
 import {
   Card,
   CardContent,
@@ -45,10 +46,11 @@ export default async function Market({
   const { region: rawR, category: rawC } = await searchParams;
   const region = rawR === "kr" || rawR === "global" ? rawR : undefined;
   const category = rawC || undefined;
-  const [skills, meta, hidden] = await Promise.all([
+  const [skills, meta, hidden, era] = await Promise.all([
     topSkills(region, category, 20),
     counts(region),
     topHiddenRequirements(region, 24),
+    marketEra(region),
   ]);
   const catLabel =
     CATEGORIES.find((c) => (c.key || undefined) === category)?.label ?? "전체 개발기술";
@@ -147,6 +149,44 @@ export default async function Market({
           </CardHeader>
         </Card>
       </div>
+
+      {/* 시장이 요구하는 스택의 시대 */}
+      {era && (
+        <Card className="mb-6">
+          <CardHeader className="pb-2">
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              Era Demand
+            </p>
+            <CardDescription>시장이 요구하는 스택의 시대 무게중심</CardDescription>
+            <CardTitle className="font-mono text-3xl font-medium">
+              ≈ {era.avg}년
+              <span className="ml-2 text-base text-muted-foreground">
+                {era.avg >= LATEST_YEAR - 1.5
+                  ? "최신 스택을 요구하는 시장"
+                  : `최신 설문(${LATEST_YEAR})보다 ${Math.round((LATEST_YEAR - era.avg) * 10) / 10}년 이전 스택도 통용`}
+              </span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-4 gap-3">
+              {era.buckets.map((b) => {
+                const pct = era.count ? Math.round((b.n / era.count) * 100) : 0;
+                return (
+                  <div key={b.label} className="rounded-lg bg-muted p-3">
+                    <p className="font-mono text-xs text-[#4A4B4F] dark:text-[#B9BBBF]">{b.label}</p>
+                    <p className="mt-1 font-mono text-xl font-medium">{pct}%</p>
+                    <p className="font-mono text-[11px] text-[#4A4B4F] dark:text-[#B9BBBF]">{b.n}건</p>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              공고 {era.count.toLocaleString()}건의 요구 기술을 시대 곡선(SO 설문)과 대조해, 공고마다
+              요구 스택의 무게중심 연도를 계산한 분포 — 게시 연도가 아니라 요구 기술의 시대
+            </p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* TOP 기술 */}
       <Card>
