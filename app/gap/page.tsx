@@ -41,14 +41,24 @@ export default async function Gap({
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
-      <header className="mb-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold tracking-tight">내 스택 격차</h1>
-          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-            ← 시장 대시보드
-          </Link>
+    <main className="mx-auto max-w-4xl px-4 py-16">
+      <div className="mb-10 flex items-center gap-2.5 text-sm">
+        <Link
+          href="/"
+          className="inline-flex h-10 items-center gap-1.5 rounded-lg border bg-card px-3.5 text-[13px] font-medium text-foreground transition hover:border-foreground"
+        >
+          ← 이력서 시대 진단
+        </Link>
+        <div className="ml-auto flex items-center gap-2.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="간택스택 마크" className="h-7 w-7 dark:invert" />
+          <span className="font-black tracking-[-0.02em]">간택스택</span>
+          <span className="text-muted-foreground">·</span>
+          <span className="font-medium text-muted-foreground" aria-current="page">스택 직접 입력</span>
         </div>
+      </div>
+      <header className="mb-6">
+        <h1 className="text-3xl font-black tracking-[-0.04em]">내 스택 격차</h1>
         <p className="mt-1 text-muted-foreground">
           내 기술을 넣으면 — 시장 수요 대비 <span className="font-medium text-foreground">뭘 갖췄고</span>,
           다음에 <span className="font-medium text-foreground">뭘 배우면</span> 지원 가능 공고가 느는지.
