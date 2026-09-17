@@ -1,0 +1,52 @@
+// 간택스택 데이터 모델
+// JobPosting(원본) → Skill(정규화) → PostingSkill(조인)
+// 빈도 / 공동출현 / 추이 / 개인격차 전부 이 3개로 계산
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model JobPosting {
+  id          String    @id @default(cuid())
+  source      String // "saramin" | "arbeitnow" | "public" | "mock"
+  sourceId    String
+  region      String  @default("kr") // "kr" | "global"
+  title       String
+  company     String?
+  url         String?
+  location    String?
+  postedAt    DateTime?
+  collectedAt DateTime  @default(now())
+  rawText     String // 제목+본문/직무내용 (추출 입력)
+  extracted   Json? // { skills[], experienceYears, hiddenRequirements[] }
+
+  skills PostingSkill[]
+
+  @@unique([source, sourceId])
+  @@index([postedAt])
+  @@index([region])
+}
+
+model Skill {
+  id       String  @id @default(cuid())
+  name     String  @unique // 정규화된 명칭 e.g. "React"
+  category String? // "frontend" | "backend" | ...
+
+  postings PostingSkill[]
+}
+
+model PostingSkill {
+  postingId String
+  skillId   String
+  posting   JobPosting @relation(fields: [postingId], references: [id], onDelete: Cascade)
+  skill     Skill      @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+
+  @@id([postingId, skillId])
+  @@index([skillId])
+}
