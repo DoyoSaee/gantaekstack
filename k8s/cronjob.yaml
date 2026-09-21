@@ -6,6 +6,7 @@ metadata:
   namespace: default
 spec:
   schedule: "0 22 * * *"
+  suspend: true # 심사기간 비용 절감 — 재개하려면 false (DB에 이미 2천건+ 있어 서비스는 정상)
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 2
