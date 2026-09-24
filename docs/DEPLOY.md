@@ -38,7 +38,7 @@ docker exec gantaek-pg pg_dump -U postgres -d gantaekstack --no-owner --no-privi
 kubectl create secret generic gantaek-secrets \
   --from-literal=DATABASE_URL='postgresql://postgres:<PW>@<POSTGRES_SVC>:5432/gantaek?schema=public' \
   --from-literal=GEMINI_API_KEY='<로컬 .env 값>' \
-  --from-literal=GEMINI_MODEL='gemini-2.5-flash' \
+  --from-literal=GEMINI_MODEL='gemini-3.6-flash' \
   --from-literal=MOEF_API_KEY='<로컬 .env 값>' \
   --from-literal=CRON_SECRET="$(openssl rand -hex 16)"
 

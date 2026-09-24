@@ -11,7 +11,7 @@ import {
 // 프로젝트의 심장: 공고 본문 → 정형 데이터.
 // GEMINI_API_KEY 있으면 스킬+카테고리+숨은요구 추출, 없으면 키워드 폴백.
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const MODEL = process.env.GEMINI_MODEL || "gemini-3.6-flash";
 const KEY = process.env.GEMINI_API_KEY;
 
 const INSTRUCTION = `너는 채용공고 분석기다. 공고 원문에서 JSON으로 추출해라.

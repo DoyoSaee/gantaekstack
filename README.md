@@ -56,7 +56,7 @@
 
 **LLM은 판정자가 아니라 구조화 계층입니다.**
 
-- Gemini 2.5 Flash(structured output)가 하는 일: 공고·이력서라는 **비정형 텍스트를 정형
+- Gemini 3.6 Flash(structured output)가 하는 일: 공고·이력서라는 **비정형 텍스트를 정형
   데이터로** (기술+카테고리+연차+숨은 요구), 그리고 진단 수치를 **사람의 언어로**(총평)
 - AI가 하지 않는 일: 무게중심·집계·추천 순위 — 전부 결정론적 코드. 같은 입력이면 항상
   같은 결과라 진단이 재현 가능합니다
@@ -82,7 +82,7 @@
 ## 스택
 
 Next.js 16 (App Router·standalone) · TypeScript · Prisma + PostgreSQL ·
-Gemini 2.5 Flash · Tailwind CSS 4 + shadcn/ui · Recharts ·
+Gemini 3.6 Flash · Tailwind CSS 4 + shadcn/ui · Recharts ·
 홈랩 k3s (traefik + cert-manager) · GitHub Actions CI/CD · 일일 수집 CronJob
 
 ## 실행
